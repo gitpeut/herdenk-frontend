@@ -1,0 +1,18 @@
+
+
+.Account-small-only{
+    max-height: 40px;
+    min-height: 25px;
+}
+
+.Account-div-small{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: calc(10px + 1vmin);
+    color: black;
+    letter-spacing: 0.1em;
+}
+

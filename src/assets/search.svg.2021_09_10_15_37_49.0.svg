@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg916"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="search.svg"
+   inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\React\slidingsides\public\search.png"
+   inkscape:export-xdpi="84.66655"
+   inkscape:export-ydpi="84.66655"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview918"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="4.3994184"
+     inkscape:cx="453.92364"
+     inkscape:cy="149.33792"
+     inkscape:window-width="3840"
+     inkscape:window-height="2066"
+     inkscape:window-x="1909"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs913" />
+  <g
+     inkscape:label="Laag 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1341"
+       transform="matrix(0.5982581,-0.54949912,0.56724831,0.57953863,33.354695,89.55271)"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\React\slidingsides\public\search.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         id="path999-6"
+         style="fill:#ffffff;stroke:#000000;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 138.56405,25.968537 a 5.9999998,5.9999998 0 0 0 -6.00016,5.999633 5.9999998,5.9999998 0 0 0 4.30052,5.752103 h -0.23254 v 9.201507 h 3.72897 v -9.201507 h -0.0977 a 5.9999998,5.9999998 0 0 0 4.30051,-5.752103 5.9999998,5.9999998 0 0 0 -5.99963,-5.999633 z" />
+      <circle
+         style="fill:#ffffff;stroke:#000000;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path1128-8"
+         cx="138.56378"
+         cy="31.91662"
+         r="5" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,63 @@
+
+/*Logo From https://freesvg.org/download/157355*/
+/*converted to grayscale with Inkscape*/
+
+.Logo-big{
+    height: 10vmin;
+}
+
+.Logo-medium{
+    height: 4.5vmin;
+}
+
+.Logo-small-only{
+    max-height: 40px;
+    min-height: 25px;
+}
+
+.Logo-small{
+    height: 5vw;
+}
+
+.Logo-div-big{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: calc(10px + 5vmin);
+    color: black;
+    letter-spacing: 0.3rem;
+}
+
+
+.Logo-div-small{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: calc(10px + 1vmin);
+    color: black;
+    letter-spacing: 0.1em;
+}
+
+
+
+.Logo-div-medium{
+    font-size: calc(10px + 2vmin);
+    color: black;
+}
+
+.Logo-title{
+    padding-top: 0.3rem;
+    padding-left: 0.5rem;
+}
+
+.Logo-title-invisible{
+    display: none;
+}
+.Logo-smalltxt{
+    color: black;
+    letter-spacing: 0.2em;
+}

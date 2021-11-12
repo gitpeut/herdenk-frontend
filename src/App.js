@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+
+import React, {useContext} from 'react';
+import {Switch, Route} from 'react-router-dom';
+import NavBar from './components/NavBar/NavBar';
+import Profile from './pages/Profile';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import './App.css';
+import PrivateRoute from "./components/PrivateRoute";
+import {AuthContext} from "./context/AuthContext";
+import './App.css';
+import ShowLogo from "./components/Logo/Logo";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    localStorage.removeItem('token');// if an invalid token was saved,this prevents crashes
+    const {loggedIn} = useContext(AuthContext);
+    return (
+        <>
+            <NavBar/>
+            <div className="content">
+                <Switch>
+                    <Route exact path="/">
+                        <ShowLogo size="big"/>
+                        Welkom op Herdenk, een plaats voor herinneringen.
+                    </Route>
+                    <PrivateRoute path="/profile" isAuthenticated={loggedIn}>
+                        <Profile/>
+                    </PrivateRoute>
+                    <Route exact path="/signin">
+                        <SignIn/>
+                    </Route>
+                    <Route exact path="/signup">
+                        <SignUp/>
+                    </Route>
+                </Switch>
+            </div>
+        </>
+    );
 }
 
 export default App;

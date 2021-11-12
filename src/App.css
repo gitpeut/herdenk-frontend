@@ -1,38 +1,94 @@
-.App {
-  text-align: center;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+.content {
+    background-color: lightgray;
+    text-align: center;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: calc(10px + 2vmin);
+    color: #444444;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+a,
+a:visited,
+a:active {
+    color: #0d3b66;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a:hover {
+    color: #ea7e1f;
 }
 
-.App-link {
-  color: #61dafb;
+
+h2 {
+    margin: 32px 0 24px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-button {
+    width: 100%;
+}
+
+
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user h5 {
+    margin-right: 8px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.logo-container img {
+    width: 40px;
+    margin-right: 8px;
+}
+
+section  {
+    margin: 0 0 50px 0;
+}
+
+/*Zet mij op een element en ik blijf voor altijd draaien!*/
+.loading-icon {
+    width: 16px;
+    height: 16px;
+    animation: rotating 1.5s linear infinite;
+}
+
+.little-red{
+    color: red;
+    font-size: 0.6rem;
+}
+
+.little-white{
+    color: white;
+    font-size: 0.6rem;
+    font-style: italic;
+}
+
+.little-black{
+    color: black;
+    font-size: 0.6rem;
+    font-style: italic;
 }

@@ -1,0 +1,39 @@
+nav {
+    background-color: #cccccc;
+    color: white;
+    display: flex;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 50px;
+    min-height: 30px;
+}
+
+nav button {
+    border-radius: 4px;
+    border: none;
+    max-height: 30px;
+    padding: 0.1vw 2vw;
+    background-color: darkgray;
+    font-size: 16px;
+    color: black;
+}
+
+/*Zorgt ervoor dat als twee buttons naast elkaar staan, er altijd ruimte tussen blijft*/
+nav button + button {
+    margin-left: 8px;
+}
+
+nav button:hover {
+    cursor: pointer;
+}
+
+
+
+nav a,
+nav a:visited,
+nav a:active {
+    color: white;
+}

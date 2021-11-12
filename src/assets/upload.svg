@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="upload.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="6.2217172"
+     inkscape:cx="144.33314"
+     inkscape:cy="397.63942"
+     inkscape:window-width="3840"
+     inkscape:window-height="2066"
+     inkscape:window-x="1909"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Laag 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect1033"
+       width="21.858246"
+       height="19.902061"
+       x="72.142639"
+       y="84.286087"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\React\slidingsides\public\upload.png"
+       inkscape:export-xdpi="55.077919"
+       inkscape:export-ydpi="55.077919" />
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:1.36247"
+       id="rect1079"
+       width="6.8436537"
+       height="9.0994473"
+       x="79.398079"
+       y="83.861359"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\React\slidingsides\public\upload.png"
+       inkscape:export-xdpi="47.897995"
+       inkscape:export-ydpi="47.897995" />
+    <g
+       id="g1692"
+       transform="matrix(1.6841218,0,0,1,32.433256,-70.592783)"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\React\slidingsides\public\upload.png"
+       inkscape:export-xdpi="47.897995"
+       inkscape:export-ydpi="47.897995"
+       style="fill:none;stroke:#000000;stroke-width:0.92468646;stroke-miterlimit:4;stroke-dasharray:none">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.92468646;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect1306"
+         width="0.92537344"
+         height="13.257848"
+         x="29.656013"
+         y="150.33369" />
+      <path
+         sodipodi:type="star"
+         style="fill:none;stroke:#000000;stroke-width:3.49487797;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path1498"
+         inkscape:flatsided="false"
+         sodipodi:sides="3"
+         sodipodi:cx="129.86768"
+         sodipodi:cy="481.21762"
+         sodipodi:r1="2.3180425"
+         sodipodi:r2="1.1590213"
+         sodipodi:arg1="0.5880026"
+         sodipodi:arg2="1.6352002"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 131.7964,482.50344 -2.00332,-0.1292 -2.00332,-0.1292 1.11355,-1.67033 1.11355,-1.67033 0.88977,1.79953 z"
+         transform="matrix(0.26419585,-0.01431406,0.01431406,0.26419585,-11.070661,24.74483)"
+         inkscape:transform-center-x="0.0031530338"
+         inkscape:transform-center-y="-0.15059182" />
+    </g>
+  </g>
+</svg>
