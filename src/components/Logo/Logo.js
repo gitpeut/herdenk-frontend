@@ -8,6 +8,7 @@ function ShowLogo( {size} ) {
     let sizeClass = 'Logo-big';
     let divClass  = 'Logo-div-small';
     let titleClass = 'Logo-title';
+    let logoTitle   = 'Home page';
 
     switch (size) {
         case 'small-logo-only':
@@ -33,7 +34,7 @@ function ShowLogo( {size} ) {
 
     return(
         <div className={divClass}>
-            <img src={logo} className={sizeClass} alt="logo"/>
+            <img src={logo} className={sizeClass} alt="logo" title={logoTitle}/>
             <div className={titleClass}>Herdenk</div>
         </div>
     );

@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {createContext, useState, useEffect, useRef} from 'react';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import backendHost from "../helpers/backendHost";
 
-export const AuthContext = React.createContext({});
+export const AuthContext = createContext({});
 
 function AuthContextProvider({children}) {
     const [loggedIn, setLoggedIn] = useState({
@@ -27,17 +27,18 @@ function AuthContextProvider({children}) {
         waitForLogin();
     }, []);
 
-    async function getUserDetails(accessToken, id) {
+    async function getUserDetails(accessToken) {
         const rc = {success: false, result: null};
 
         try {
-            rc.result = await axios.get(`http://${backendHost()}/api/v1/users/me`, {
-                headers:
-                    {
-                        'Content-Type': 'application/json',
-                        Authorization: 'Bearer ' + accessToken
-                    }
-            });
+            rc.result = await axios.get(`http://${backendHost()}/api/v1/users/me`,
+                {
+                    headers:
+                        {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + accessToken
+                        }
+                });
 
             rc.success = true;
             return (rc);
@@ -49,21 +50,17 @@ function AuthContextProvider({children}) {
 
     async function login() {
         //return true (or false) when logged in, so this can be acted upon at form submit
-        //random success guaranteed
-        //const validAccount = ((Math.random() * 10) & 1) ? true : false;
-
         // get JWT token, if available
 
-        const JWT = localStorage.getItem('token');
+        const JWT = localStorage.getItem('herdenkToken');
 
         if ( JWT ) {
-            console.warn('Decoding token '+ JWT);
+
             let decodedToken;
             try {
                 decodedToken = jwtDecode(JWT);
-                console.warn( "decodedJWT = ", decodedToken);
             }catch(e){
-                localStorage.removeItem('token');
+                localStorage.removeItem('herdenkToken');
 
             }
             setLoggedIn({
@@ -74,7 +71,7 @@ function AuthContextProvider({children}) {
             );
 
 
-            const rc = await getUserDetails(JWT, decodedToken.sub);
+            const rc = await getUserDetails(JWT);
 
             if (rc.success) {
                 // user details has following fields:
@@ -114,7 +111,7 @@ function AuthContextProvider({children}) {
 
     function logout() {
         setLoggedIn({...loggedIn, loggedIn: false, userDetails: null, loginReady: true});
-        localStorage.removeItem('token');
+        localStorage.removeItem('herdenkToken');
     }
 
     autStatus.current = {

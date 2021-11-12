@@ -3,12 +3,13 @@ nav {
     color: white;
     display: flex;
     padding-bottom: 5px;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
     align-items: center;
     justify-content: space-between;
     max-height: 50px;
     min-height: 30px;
+    width: 100vw;
 }
 
 nav button {
@@ -29,8 +30,6 @@ nav button + button {
 nav button:hover {
     cursor: pointer;
 }
-
-
 
 nav a,
 nav a:visited,

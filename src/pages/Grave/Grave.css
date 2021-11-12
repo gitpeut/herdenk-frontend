@@ -1,0 +1,21 @@
+.grave-three{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.grave-gifts{
+    width: 40vw;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.grave-gift{
+    width: 30px;
+    height: 30px;
+}
+
+.grave-title{
+    text-shadow: -2px 2px darkgrey;
+}

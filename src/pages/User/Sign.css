@@ -1,4 +1,7 @@
 /*Algemene formulier-styling*/
+h4{
+    font-size: 12pt;
+}
 .sign-form {
     display: flex;
     flex-direction: column;

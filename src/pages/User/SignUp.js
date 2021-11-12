@@ -1,30 +1,46 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import entropy from "../helpers/entropy";
-import matchEmail from "../helpers/matchEmail";
-import backendHost from "../helpers/backendHost";
+import entropy from "../../helpers/entropy";
+import matchEmail from "../../helpers/matchEmail";
+import backendHost from "../../helpers/backendHost";
+import {AuthContext} from "../../context/AuthContext";
 import './Sign.css'
 
 function SignUp() {
     const [submitMessage, setSubmitMessage] = useState(null);
+    const {login, loggedIn, userDetails} = useContext(AuthContext);
     const {register, handleSubmit, formState: {errors}} = useForm({
         mode: "onBlur", // update errors when field goes out of focus
         defaultValues: {
-            email: "",
-            password: "",
-            fullName: "",
+            email: loggedIn?userDetails.email:'',
+            password: loggedIn?'NietVeranderen':'',
+            username: loggedIn?userDetails.fullName:'',
         },
     });
 
     async function postRegistration(data) {
         const rc = {success: false, JWT: null, result: null};
         try {
-
-            rc.result = await axios.post(`http://${backendHost()}/api/v1/register`, data);
-            rc.success = true;
-
+            if ( loggedIn ){
+                const JWT = localStorage.getItem('herdenkToken');
+                rc.result = await axios.put(`http://${backendHost()}/api/v1/users/${userDetails.userId}`,
+                    data,
+                    {
+                        headers:
+                            {
+                                'Content-Type': 'application/json',
+                                Authorization: 'Bearer ' + JWT
+                            },
+                    }
+                    );
+                rc.success = true;
+                login();
+            }else {
+                rc.result = await axios.post(`http://${backendHost()}/api/v1/register`, data);
+                rc.success = true;
+            }
             return (rc);
         } catch (e) {
             if ( e.response ) {
@@ -41,19 +57,29 @@ function SignUp() {
             message = 'Email adres is ongeldig';
         }
 
-        if (entropy(data.password) < 3.1) { // minimal 3, now set to 0 for testing purposes
-            message += (message === '') ? 'Het password is te zwak' : ' en het password is te zwak';
+        if ( !loggedIn || ( loggedIn && data.password !== 'NietVeranderen')) {
+            if (entropy(data.password) < 3.1) { // minimal 3, now set to 0 for testing purposes
+                message += (message === '') ? 'Het password is te zwak' : ' en het password is te zwak';
+            }
         }
         if (message !== '') {
             setSubmitMessage(message);
         } else {
-            const rc = await postRegistration({
+            const postData = {
                 email: data.email,
-                password: data.password,
                 fullName: data.username,
-            });
+            }
+            if ( !loggedIn ){
+                postData.password = data.password;
+            }
+            if ( loggedIn && data.password !== 'NietVeranderen'){
+                postData.password = data.password;
+            }
+            const rc = await postRegistration(
+                postData
+            );
 
-            setSubmitMessage(rc.success ? 'U bent geregistreerd' : rc.result);
+            setSubmitMessage(rc.success ? 'Succesvol opgeslagen' : rc.result);
 
         }
     }
@@ -61,12 +87,20 @@ function SignUp() {
 
     return (
         <>
-            <h1>Registreren</h1>
-            <p className="sign-text">Voordat u een virtueel graf of een andere herinnering kunt bekijken
-               of maken, moet u zich registreren. U kunt daarna inloggen met uw email adres
-               en uw wachtwoord. Dat wordt niet getoond aan andere gebruikers, alleen uw
-               zelf gekozen gebruikersnaam.
-            </p>
+            { !loggedIn &&
+                <>
+                <h4>Registreren</h4>
+                <p className="sign-text">Voordat u een virtueel graf of een andere herinnering kunt bekijken
+                of maken, moet u zich registreren. U kunt daarna inloggen met uw email adres
+                en uw wachtwoord. Dat wordt niet getoond aan andere gebruikers, alleen uw
+                zelf gekozen gebruikersnaam.
+                </p>
+                </>
+            }
+            { loggedIn &&
+            <h4>Gegevens wijzigen</h4>
+            }
+
             <form className="sign-form" onSubmit={handleSubmit(validateSubmit)}>
                 <label htmlFor="email">email
                     {/*Type to email, supplies a rough test on email address validity in the browser*/}
@@ -87,6 +121,21 @@ function SignUp() {
                 </label>
 
                 <label htmlFor="password">password
+                    {loggedIn &&
+                    <input
+                        type="password"
+                        {...register("password", {
+                                minLength: {
+                                    value: 8,
+                                    message: "password moet minstens 8 tekens bevatten",
+                                }
+                            },
+                        )}
+
+                        id="password"
+                    />
+                    }
+                    { !loggedIn &&
                     <input
                         type="password"
                         {...register("password", {
@@ -100,6 +149,7 @@ function SignUp() {
 
                         id="password"
                     />
+                    }
                     {errors.password && <p className="little-red">{errors.password.message}</p>}
                 </label>
 
@@ -121,11 +171,22 @@ function SignUp() {
                 </label>
 
                 <button type="submit" id="submit">
-                    Registreren
+                    {loggedIn &&
+                    <>
+                        Wijzigen
+                    </>
+                    }
+                    {!loggedIn &&
+                    <>
+                        Registreren
+                    </>
+                    }
                 </button>
                 {submitMessage && <p className="little-red">{submitMessage}</p>}
             </form>
-            <p className="sign-text">Je kunt <Link to="/signin">hier</Link> inloggen</p>
+            {!loggedIn &&
+                <p className="sign-text">Je kunt <Link to="/signin">hier</Link> inloggen</p>
+            }
         </>
     );
 }

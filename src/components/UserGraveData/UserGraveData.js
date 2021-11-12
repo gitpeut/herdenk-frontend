@@ -1,27 +1,35 @@
-import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import React, {useContext,useEffect,useState} from 'react';
 import {AuthContext} from "../../context/AuthContext";
+import './UserGraveData.css';
+import GraveSummary from "./GraveSummary";
 
-function UserData() {
+function UserGraveData( {accessMode} ) {
     const {userDetails} = useContext(AuthContext);
+    const [myGraveList, setMyGraveList] = useState([]);
+
+    useEffect(
+        () => {
+            function getGraveNumbers() {
+                console.log( "Getting grave numbers");
+
+                const list = userDetails.authorities.filter( a => a.authority === accessMode );
+                setMyGraveList(list);
+            }
+            if ( userDetails.authorities )getGraveNumbers();
+        } ,[ userDetails.authorities, accessMode ]);
+
 
     return (
         <>
-                <h4>Gegevens</h4>
-
-                <section>
-                    <div className="profile-rowp">
-                        <div className="profile-cold">Gebruikersnaam:</div>
-                        <div className="profile-cold">{userDetails.fullName}</div>
-                    </div>
-                    <div className="profile-rowp">
-                        <div className="profile-cold">Email:</div>
-                        <div className="profile-cold">{userDetails.email}</div>
-                    </div>
-                    <Link to="/signup">Gegevens wijzigen</Link>
-                </section>
+            <h4>Mijn graven</h4>
+            <div className="ug-row">
+                {myGraveList.map((a) => {
+                        return (<GraveSummary graveId={a.graveId} key={`summary-${a.graveId}`}/>);
+                    }
+                )}
+            </div>
         </>
     );
 }
 
-export default UserData;
+export default UserGraveData;

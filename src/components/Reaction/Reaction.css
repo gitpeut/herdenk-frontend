@@ -1,0 +1,84 @@
+.r-img{
+    margin: 0.8vw;
+}
+
+.r-img.normal{
+    max-width: 45vw;
+}
+
+.r-img.big{
+    max-width: 90vw;
+}
+
+.r-div{
+    background-color: white;
+    border: 1px darkgray solid;
+    border-radius: 5px;
+    padding: 1px 5px 5px;
+    margin: 5px;
+    text-align: left;
+    color: black;
+    box-shadow: 4px 2px 2px darkgray;
+}
+
+.r-div.normal{
+    width: 50vw;
+    font-size: 0.7rem;
+}
+.r-center{
+    display: flex;
+    justify-content: center;
+}
+
+.r-div.big{
+    width: 62vw;
+    font-size: 0.8rem;
+    border-color: black;
+}
+
+.r-name-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.r-50x50{
+    height: 2vw;
+    min-height: 30px;
+}
+
+.r-12x12{
+    height: 1vw;
+    min-height: 12px;
+}
+
+.r-submit{
+    height: 2vw;
+    min-height: 30px;
+}
+
+.r-hidden{
+    display: none;
+}
+
+
+.r-textarea{
+    font-family: Arial, sans-serif;
+    width: 96%;
+    height: 12vw;
+    padding: 5px;
+    margin: 5px 5px 20px;
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: aliceblue;
+    font-size: 0.7rem;
+    word-break: break-word;
+}
+
+.r-filebutton{
+    width: 20px;
+    height: 20px;
+    background-color: #0d3b66;
+    border: 1px solid black;
+}

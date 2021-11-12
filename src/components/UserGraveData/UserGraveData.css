@@ -1,0 +1,32 @@
+
+.ug-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.ug-div{
+    min-width: 120px;
+    font-size: 0.3rem;
+    margin: 10px;
+    padding: 5px;
+}
+
+.ug-img{
+    height: 50px;
+
+}
+
+.ug-date{
+    font-size: 0.1rem;
+    font-style: italic;
+    min-width: 50px;
+}
+
+.ug-occupant{
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+.ug-text{
+    font-size: 0.4rem;
+}

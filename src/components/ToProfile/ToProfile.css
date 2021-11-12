@@ -1,18 +1,12 @@
 
 
-.Account-small-only{
-    max-height: 40px;
-    min-height: 25px;
+.ToProfile-small-only{
+    max-height: 25px;
 }
 
-.Account-div-small{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.ToProfile-div{
     font-family: Arial, sans-serif;
-    font-size: calc(10px + 1vmin);
-    color: black;
-    letter-spacing: 0.1em;
+    height: 100%;
+    margin: 20px;
 }
 

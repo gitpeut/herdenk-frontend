@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import {AuthContext} from "../context/AuthContext";
+import {AuthContext} from "../../context/AuthContext";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import backendHost from "../helpers/backendHost";
+import backendHost from "../../helpers/backendHost";
 import './Sign.css';
 
 function SignIn() {

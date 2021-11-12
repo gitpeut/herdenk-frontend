@@ -1,22 +1,21 @@
 import React, {useContext} from 'react';
-import {useHistory, Link} from 'react-router-dom';
+import {useLocation, useHistory, Link} from 'react-router-dom';
 import {AuthContext} from "../../context/AuthContext";
 import ShowLogo from "../Logo/Logo";
+import ToProfile from "../ToProfile/ToProfile";
 import './NavBar.css';
 
 function NavBar() {
     const history = useHistory();
-    let {logout, loggedIn, user} = useContext(AuthContext);
-
-
+    const {logout, loggedIn, user} = useContext(AuthContext);
+    let currentPath = useLocation().pathname;
     return (
         <nav>
             <Link to="/">
                 <ShowLogo size="small-logo-only"/>
             </Link>
-
             <div>
-                {!loggedIn && !window.location.href.endsWith("/signin") &&
+                {!loggedIn && !currentPath.endsWith("/signin") &&
                 <>
                     <button
                         type="button"
@@ -28,7 +27,7 @@ function NavBar() {
                 }
                 {loggedIn &&
                 <>
-                    <p className="little-black">Logged in as {user}</p>
+                    <p className="little-black">Ingelogd als {user}</p>
                     <button
                         type="button"
                         onClick={() => {
@@ -40,6 +39,7 @@ function NavBar() {
                     </button>
                 </>
                 }
+                <ToProfile />
             </div>
         </nav>
     );

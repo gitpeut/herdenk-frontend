@@ -1,17 +1,25 @@
-import React from 'react';
-import './Account.css'
-import head from '../../assets/account.svg';
+import React, {useContext} from 'react';
+import './ToProfile.css'
+import head from '../../assets/png/account.png';
+import {AuthContext} from "../../context/AuthContext";
+import {useLocation,Link} from "react-router-dom";
 
-
-function Account() {
-    let divClass    = 'Account-div-small';
-    const sizeClass = 'Account-small-only';
+function ToProfile() {
+    const {loggedIn} = useContext(AuthContext);
+    let currentPath = useLocation().pathname;
+    const sizeClass = 'ToProfile-small-only';
     const logoTitle = 'Persoonlijke gegevens';
-    return(
-        <div className={divClass}>
-            <img src={head} className={sizeClass} alt="Naar persoonlijke gegevens" title={logoTitle}/>
-        </div>
+    return (
+        <>
+            {loggedIn && !currentPath.endsWith('/profile') &&
+            <Link to="/profile">
+            <span className="ToProfile-div">
+            <img src={head} className={sizeClass} alt="Personal page" title={logoTitle}/>
+        </span>
+            </Link>
+             }
+        </>
     );
 }
 
-export default Account();
+export default ToProfile;
