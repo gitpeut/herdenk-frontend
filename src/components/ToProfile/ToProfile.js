@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import './ToProfile.css'
 import head from '../../assets/account.png';
 import {AuthContext} from "../../context/AuthContext";
-import {useLocation,Link} from "react-router-dom";
+import {useLocation, Link} from "react-router-dom";
 
 function ToProfile() {
     const {loggedIn} = useContext(AuthContext);
@@ -17,7 +17,7 @@ function ToProfile() {
             <img src={head} className={sizeClass} alt="Personal page" title={logoTitle}/>
         </span>
             </Link>
-             }
+            }
         </>
     );
 }

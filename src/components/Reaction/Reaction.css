@@ -1,16 +1,16 @@
-.r-img{
+.r-img {
     margin: 0.8vw;
 }
 
-.r-img.normal{
+.r-img.normal {
     max-width: 45vw;
 }
 
-.r-img.big{
+.r-img.big {
     max-width: 60vw;
 }
 
-.r-div{
+.r-div {
     background-color: white;
     border: 1px darkgray solid;
     border-radius: 5px;
@@ -21,48 +21,50 @@
     box-shadow: 4px 2px 2px darkgray;
 }
 
-.r-div.normal{
+.r-div.normal {
     width: 50vw;
     font-size: 0.7rem;
 }
-.r-center{
+
+.r-center {
     display: flex;
     justify-content: center;
 }
 
-.r-div.big{
+.r-div.big {
     width: 62vw;
     font-size: 0.8rem;
     border-color: black;
 }
 
-.r-name-date{
+.r-name-date {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 10px;
 }
-.r-50x50{
+
+.r-50x50 {
     height: 2vw;
     min-height: 30px;
 }
 
-.r-12x12{
+.r-12x12 {
     height: 1vw;
     min-height: 12px;
 }
 
-.r-submit{
+.r-submit {
     height: 2vw;
     min-height: 30px;
 }
 
-.r-hidden{
+.r-hidden {
     display: none;
 }
 
 
-.r-textarea{
+.r-textarea {
     font-family: Arial, sans-serif;
     width: 96%;
     height: 12vw;
@@ -76,7 +78,7 @@
     word-break: break-word;
 }
 
-.r-filebutton{
+.r-filebutton {
     width: 20px;
     height: 20px;
     background-color: #0d3b66;

@@ -24,6 +24,7 @@ function AuthContextProvider({children}) {
         async function waitForLogin() {
             await login();
         }
+
         waitForLogin();
     }, []);
 
@@ -57,12 +58,12 @@ function AuthContextProvider({children}) {
 
         const JWT = localStorage.getItem('herdenkToken');
 
-        if ( JWT ) {
+        if (JWT) {
 
             let decodedToken;
             try {
                 decodedToken = jwtDecode(JWT);
-            }catch(e){
+            } catch (e) {
                 localStorage.removeItem('herdenkToken');
 
             }

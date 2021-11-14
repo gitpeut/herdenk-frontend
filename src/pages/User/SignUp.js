@@ -14,16 +14,16 @@ function SignUp() {
     const {register, handleSubmit, formState: {errors}} = useForm({
         mode: "onBlur", // update errors when field goes out of focus
         defaultValues: {
-            email: loggedIn?userDetails.email:'',
-            password: loggedIn?'NietVeranderen':'',
-            username: loggedIn?userDetails.fullName:'',
+            email: loggedIn ? userDetails.email : '',
+            password: loggedIn ? 'NietVeranderen' : '',
+            username: loggedIn ? userDetails.fullName : '',
         },
     });
 
     async function postRegistration(data) {
         const rc = {success: false, JWT: null, result: null};
         try {
-            if ( loggedIn ){
+            if (loggedIn) {
                 const JWT = localStorage.getItem('herdenkToken');
                 rc.result = await axios.put(`http://${backendHost()}/api/v1/users/${userDetails.userId}`,
                     data,
@@ -34,17 +34,17 @@ function SignUp() {
                                 Authorization: 'Bearer ' + JWT
                             },
                     }
-                    );
+                );
                 rc.success = true;
                 login();
-            }else {
+            } else {
                 rc.result = await axios.post(`http://${backendHost()}/api/v1/register`, data);
                 rc.success = true;
             }
             return (rc);
         } catch (e) {
-            if ( e.response ) {
-                 rc.result = e.response.data;
+            if (e.response) {
+                rc.result = e.response.data;
             }
             return (rc);
         }
@@ -57,7 +57,7 @@ function SignUp() {
             message = 'Email adres is ongeldig';
         }
 
-        if ( !loggedIn || ( loggedIn && data.password !== 'NietVeranderen')) {
+        if (!loggedIn || (loggedIn && data.password !== 'NietVeranderen')) {
             if (entropy(data.password) < 3.1) { // minimal 3, now set to 0 for testing purposes
                 message += (message === '') ? 'Het password is te zwak' : ' en het password is te zwak';
             }
@@ -69,10 +69,10 @@ function SignUp() {
                 email: data.email,
                 fullName: data.username,
             }
-            if ( !loggedIn ){
+            if (!loggedIn) {
                 postData.password = data.password;
             }
-            if ( loggedIn && data.password !== 'NietVeranderen'){
+            if (loggedIn && data.password !== 'NietVeranderen') {
                 postData.password = data.password;
             }
             const rc = await postRegistration(
@@ -87,17 +87,17 @@ function SignUp() {
 
     return (
         <>
-            { !loggedIn &&
-                <>
+            {!loggedIn &&
+            <>
                 <h4>Registreren</h4>
                 <p className="sign-text">Voordat u een virtueel graf of een andere herinnering kunt bekijken
-                of maken, moet u zich registreren. U kunt daarna inloggen met uw email adres
-                en uw wachtwoord. Dat wordt niet getoond aan andere gebruikers, alleen uw
-                zelf gekozen gebruikersnaam.
+                    of maken, moet u zich registreren. U kunt daarna inloggen met uw email adres
+                    en uw wachtwoord. Dat wordt niet getoond aan andere gebruikers, alleen uw
+                    zelf gekozen gebruikersnaam.
                 </p>
-                </>
+            </>
             }
-            { loggedIn &&
+            {loggedIn &&
             <h4>Gegevens wijzigen</h4>
             }
 
@@ -135,7 +135,7 @@ function SignUp() {
                         id="password"
                     />
                     }
-                    { !loggedIn &&
+                    {!loggedIn &&
                     <input
                         type="password"
                         {...register("password", {
@@ -185,7 +185,7 @@ function SignUp() {
                 {submitMessage && <p className="little-red">{submitMessage}</p>}
             </form>
             {!loggedIn &&
-                <p className="sign-text">Je kunt <Link to="/signin">hier</Link> inloggen</p>
+            <p className="sign-text">Je kunt <Link to="/signin">hier</Link> inloggen</p>
             }
         </>
     );

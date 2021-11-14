@@ -1,4 +1,4 @@
-import React, {useEffect,useState,useContext} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import backendHost from "../../helpers/backendHost";
@@ -9,7 +9,7 @@ import PermissionLine from './PermissionLine';
 import cancel from "../../assets/png/cancel.png";
 import {AuthContext} from "../../context/AuthContext";
 
-function GraveSummary( {graveId, update, setUpdate} ) {
+function GraveSummary({graveId, update, setUpdate}) {
     const [graveData, setGraveData] = useState({});
     const {login} = useContext(AuthContext);
 
@@ -28,20 +28,21 @@ function GraveSummary( {graveId, update, setUpdate} ) {
                             }
                     });
 
-                    const key = `grave-${ result.data.graveId}`;
+                    const key = `grave-${result.data.graveId}`;
                     const occupant = result.data.occupantFullName;
-                    const NLDate = formatDate( result.data.creationDate );
+                    const NLDate = formatDate(result.data.creationDate);
 
-                    setGraveData( { key: key, date: NLDate, occupant: occupant, full: result.data } );
+                    setGraveData({key: key, date: NLDate, occupant: occupant, full: result.data});
 
                 } catch (e) {
                     console.error(`Could not get grave data ${e}`);
                 }
             }
-            if (graveId)getGrave(graveId);
-        }, [graveId, update ]);
 
-    async function deleteGrave(){
+            if (graveId) getGrave(graveId);
+        }, [graveId, update]);
+
+    async function deleteGrave() {
         try {
             const JWT = localStorage.getItem('herdenkToken');
             //Remove the request
@@ -54,7 +55,7 @@ function GraveSummary( {graveId, update, setUpdate} ) {
                     }
             });
             login();
-            setUpdate( result);
+            setUpdate(result);
         } catch (e) {
             console.error(`Could not delete reaction ${e}`);
         }
@@ -63,26 +64,27 @@ function GraveSummary( {graveId, update, setUpdate} ) {
     let first = true;
     let displayHeader = true;
     return (
-        <div key={`ugpdiv${graveId}`} className="profile-rowp" >
-            <div key={`ugpsub${graveId}`} className="ug-div" >
+        <div key={`ugpdiv${graveId}`} className="profile-rowp">
+            <div key={`ugpsub${graveId}`} className="ug-div">
 
-                    <Link to={`/grave/${graveId}`}>
-                        <img src={stone} className="ug-img" alt="stone" title={'Gemaakt op ' + graveData.date} key={`ug-${graveId}-stone`}/>
-                    </Link>
-                    <div key={`ugdiv1${graveId}`} className="ug-occupant" >
-                        <button className="ug-button" id="delGrave" onClick={() => deleteGrave()}
-                                key={`delGrave-${graveId}`}>
-                            <img className="ug-button-img" id="cancel-img" src={cancel} alt="Graf verwijderen"
-                                 title="Graf verwijderen" key={`delGrave-${graveId}-image`}/>
-                        </button>
-                    </div>
+                <Link to={`/grave/${graveId}`}>
+                    <img src={stone} className="ug-img" alt="stone" title={'Gemaakt op ' + graveData.date}
+                         key={`ug-${graveId}-stone`}/>
+                </Link>
+                <div key={`ugdiv1${graveId}`} className="ug-occupant">
+                    <button className="ug-button" id="delGrave" onClick={() => deleteGrave()}
+                            key={`delGrave-${graveId}`}>
+                        <img className="ug-button-img" id="cancel-img" src={cancel} alt="Graf verwijderen"
+                             title="Graf verwijderen" key={`delGrave-${graveId}-image`}/>
+                    </button>
+                </div>
 
-                    <span key={`ugdiv2${graveId}`} className="ug-occupant" >{graveData.occupant}</span>
+                <span key={`ugdiv2${graveId}`} className="ug-occupant">{graveData.occupant}</span>
 
-                <ul key={`ugpul${graveId}`} className="ug-ul" >
+                <ul key={`ugpul${graveId}`} className="ug-ul">
 
                     {graveData.full &&
-                    graveData.full.reactions.map((r,index) => {
+                    graveData.full.reactions.map((r, index) => {
                             if (r.type === 'READ' || r.type === 'WRITE') {
                                 if (first) {
                                     displayHeader = true;

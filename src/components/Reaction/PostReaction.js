@@ -6,8 +6,8 @@ import './Reaction.css';
 import foto from '../../assets/png/foto.png';
 
 function PostReaction({graveId, graveUpdater}) {
-    const [errorMessage,setErrorMessage] = useState();
-    const {register, handleSubmit,setValue} = useForm({
+    const [errorMessage, setErrorMessage] = useState();
+    const {register, handleSubmit, setValue} = useForm({
         mode: "onBlur",
         reValidateMode: 'onBlur',
         defaultValues: {
@@ -61,16 +61,16 @@ function PostReaction({graveId, graveUpdater}) {
                 })
                 .then(res => {
                     console.log("response from server: ", res);
-                    try{
+                    try {
                         //reset form fields on successful submit
-                        setValue('text', '', { shouldValidate: false });
-                        setValue('media', '', { shouldValidate: false });
-                    }catch(e){
+                        setValue('text', '', {shouldValidate: false});
+                        setValue('media', '', {shouldValidate: false});
+                    } catch (e) {
                         console.log('set value failed', e);
                     }
-                    graveUpdater( res.data );
+                    graveUpdater(res.data);
                 });
-        }catch(e){
+        } catch (e) {
             setErrorMessage('Verzenden mislukt');
         }
 

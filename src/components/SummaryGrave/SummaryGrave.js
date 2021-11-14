@@ -24,12 +24,14 @@ function SummaryGrave({grave}) {
     if (grave.access === 'NONE') access = false;
     if (grave.access === 'PUBLIC' || grave.access === 'READ') askWrite = true;
 
-    function displayAWhile( message ){
-        setAlreadyAsked( message );
-        setTimeout(() => { setAlreadyAsked(null)}, 8000);
+    function displayAWhile(message) {
+        setAlreadyAsked(message);
+        setTimeout(() => {
+            setAlreadyAsked(null)
+        }, 8000);
     }
 
-    async function postAccess( mode ) {
+    async function postAccess(mode) {
 
         const URL = `http://${backendHost()}/api/v1/reactions/permission/${grave.graveId}/${mode}`;
         const JWT = localStorage.getItem('herdenkToken');
@@ -40,18 +42,18 @@ function SummaryGrave({grave}) {
             await axios.post(URL, '', config);
         } catch (e) {
             if (e.response) {
-                console.log('log message ', e.response.data.message,e.response);
-                if ( e.response.status === 409 ) displayAWhile( 'Al in behandeling');
+                console.log('log message ', e.response.data.message, e.response);
+                if (e.response.status === 409) displayAWhile('Al in behandeling');
             }
             console.error(`Failed ask for write Access ${e}`);
         }
     }
 
-    async function askWriteAccess (){
+    async function askWriteAccess() {
         await postAccess('WRITE');
     }
 
-    async function askReadAccess (){
+    async function askReadAccess() {
         await postAccess('READ');
     }
 
@@ -77,7 +79,7 @@ function SummaryGrave({grave}) {
             }
             <div className="sg-epitaph">{grave.occupantFullName}</div>
 
-            { access && askWrite &&
+            {access && askWrite &&
             <img src={pen}
                  className="sg-askwrite"
                  alt="Vraag schrijfrecht"

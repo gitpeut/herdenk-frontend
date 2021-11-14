@@ -1,4 +1,3 @@
-
 import {useState} from "react";
 import './Reaction.css';
 import backendHost from "../../helpers/backendHost";
@@ -19,23 +18,23 @@ import axios from "axios";
 // }
 
 
-function Reaction( {reaction, first, graveUpdater } ) {
-    const [errorMessage,setErrorMessage] = useState();
-    if ( reaction.type !== 'TEXT' && reaction.type !== 'MEDIA' ) return (<></>);
+function Reaction({reaction, first, graveUpdater}) {
+    const [errorMessage, setErrorMessage] = useState();
+    if (reaction.type !== 'TEXT' && reaction.type !== 'MEDIA') return (<></>);
 
     let divClass = "r-div normal";
     let imgClass = "r-img normal";
 
-    if ( first ){
+    if (first) {
         divClass = "r-div big";
         imgClass = "r-img big";
     }
 
-    const NLDate = formatDate( reaction.creationDate );
-    const reactionKey   = `reactionmain-${reaction.reactionId}`;
+    const NLDate = formatDate(reaction.creationDate);
+    const reactionKey = `reactionmain-${reaction.reactionId}`;
 
     let imgURL = null;
-    if ( reaction.mediaPath ) {
+    if (reaction.mediaPath) {
         imgURL = `http://${backendHost()}${reaction.mediaPath}`;
         console.log('imgURL ', imgURL);
     }
@@ -45,7 +44,7 @@ function Reaction( {reaction, first, graveUpdater } ) {
         const JWT = localStorage.getItem('herdenkToken');
 
         try {
-             await axios
+            await axios
                 .delete(reactionURL, {
                     headers:
                         {
@@ -54,10 +53,10 @@ function Reaction( {reaction, first, graveUpdater } ) {
                 })
                 .then(res => {
                     console.log("response from server: ", res);
-                    graveUpdater( res );
+                    graveUpdater(res);
                 });
-        }catch(e){
-          setErrorMessage( "verwijderen mislukt");
+        } catch (e) {
+            setErrorMessage("verwijderen mislukt");
         }
     }
 
@@ -68,12 +67,13 @@ function Reaction( {reaction, first, graveUpdater } ) {
                 <div className="little-black" key={`${reactionKey}-2`}>{reaction.userName}</div>
                 <div className="little-black" key={`${reactionKey}-3`}>{NLDate}</div>
                 {errorMessage && <div className="little-red">{errorMessage}</div>}
-                <img src={trash} className="r-12x12" alt="delete reaction" title="verwijder deze reactie" onClick={deleteReaction} />
+                <img src={trash} className="r-12x12" alt="delete reaction" title="verwijder deze reactie"
+                     onClick={deleteReaction}/>
             </div>
             <div className="r-center">
-            { reaction.mediaPath &&
+                {reaction.mediaPath &&
                 <GetBlob url={imgURL} classname={imgClass} blobKey={`blob-${reaction.reactionId}`}/>
-            }
+                }
             </div>
             <div key={`${reactionKey}-4`}>
                 {reaction.text}

@@ -9,19 +9,19 @@ import axios from "axios";
 function PermissionLine( {reaction, parentUpdater}){
 
     async function allowAccess() {
-        const methods=["put","post"]
-        for( let method in methods) {
+        const methods = ["put", "post"]
+        for (let method in methods) {
             try {
                 const JWT = localStorage.getItem('herdenkToken');
                 // Add or change the access right to this grave for the requester
                 const URL = `http://${backendHost()}/api/v1/authorities/grave/${reaction.graveId}/${reaction.userId}/${reaction.type}`;
-                const config = {headers: { Authorization: 'Bearer ' + JWT }};
+                const config = {headers: {Authorization: 'Bearer ' + JWT}};
 
                 let result;
-                if ( methods[method] === "put") {
+                if (methods[method] === "put") {
                     result = await axios.put(URL, '', config);
                 }
-                if ( methods[method] === "post"){
+                if (methods[method] === "post") {
                     result = await axios.post(URL, '', config);
                 }
 

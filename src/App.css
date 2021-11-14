@@ -5,7 +5,6 @@
 }
 
 
-
 .content {
     background-color: lightgray;
     text-align: center;
@@ -42,7 +41,6 @@ h2 {
 }
 
 
-
 .user {
     display: flex;
     align-items: center;
@@ -66,7 +64,6 @@ h2 {
 }
 
 
-
 /*Zet mij op een element en ik blijf voor altijd draaien!*/
 .loading-icon {
     width: 16px;
@@ -74,18 +71,18 @@ h2 {
     animation: rotating 1.5s linear infinite;
 }
 
-.little-red{
+.little-red {
     color: red;
     font-size: 0.6rem;
 }
 
-.little-white{
+.little-white {
     color: white;
     font-size: 0.6rem;
     font-style: italic;
 }
 
-.little-black{
+.little-black {
     color: black;
     font-size: 0.6rem;
     font-style: italic;

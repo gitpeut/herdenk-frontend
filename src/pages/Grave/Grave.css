@@ -1,28 +1,28 @@
-.grave-three{
+.grave-three {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.grave-right{
+.grave-right {
     display: flex;
     flex-direction: row;
     justify-content: right;
     height: 30px;
 }
 
-.grave-gifts{
+.grave-gifts {
     width: 40vw;
     margin: 10px;
     cursor: pointer;
 }
 
-.grave-gift{
+.grave-gift {
     width: 30px;
     height: 30px;
 }
 
-.grave-title{
+.grave-title {
     text-shadow: 1px 1px darkgrey;
 }
 
@@ -49,7 +49,7 @@
     margin: 6px 0;
 }
 
-.grave-checkbox{
+.grave-checkbox {
     margin: 10px;
 }
 
@@ -59,6 +59,6 @@
     height: 30px;
     margin-top: 30px;
     padding: 0.1vw 2vw;
-    background-color: lightgray ;
+    background-color: lightgray;
     color: black;
 }

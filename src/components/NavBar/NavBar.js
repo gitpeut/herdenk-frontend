@@ -39,7 +39,7 @@ function NavBar() {
                     </button>
                 </>
                 }
-                <ToProfile />
+                <ToProfile/>
             </div>
         </nav>
     );

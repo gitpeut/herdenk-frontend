@@ -1,5 +1,5 @@
 
-.sg-main{
+.sg-main {
 
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
 
 }
 
-.sg-above{
+.sg-above {
     z-index: 2;
     border: 1px black solid;
     padding: 2px;
@@ -25,16 +25,16 @@
     margin-top: 20px;
 }
 
-.sg-stone{
+.sg-stone {
     height: 50px;
 }
 
-.sg-askwrite{
+.sg-askwrite {
     height: 12px;
     background-color: #dddddd;
 }
 
-.sg-epitaph{
+.sg-epitaph {
     height: 0.8rem;
     font-size: 0.5rem;
     color: black;

@@ -1,7 +1,8 @@
 /*Algemene formulier-styling*/
-h4{
+h4 {
     font-size: 12pt;
 }
+
 .sign-form {
     display: flex;
     flex-direction: column;
@@ -11,7 +12,7 @@ h4{
     border-radius: 4px;
 }
 
-.sign-text{
+.sign-text {
     font-size: 9pt;
     max-width: 300px;
     margin: 10px;
@@ -34,6 +35,6 @@ h4{
     height: 30px;
     margin-top: 30px;
     padding: 0.1vw 2vw;
-    background-color: lightgray ;
+    background-color: lightgray;
     color: black;
 }

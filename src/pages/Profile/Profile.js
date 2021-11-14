@@ -6,20 +6,20 @@ import "./Profile.css"
 
 function Profile() {
     const {loggedIn, login} = useContext(AuthContext);
-    const [update, setUpdate] = useState( );
+    const [update, setUpdate] = useState();
 
     useEffect(
         () => {
             login();
-        } , [update]);
+        }, [update]);
 
     return (
         <>
             {loggedIn &&
-                <>
-                <UserData />
-                <UserGraveData accessMode="OWNER" setUpdate={setUpdate} update={update} />
-                </>
+            <>
+                <UserData/>
+                <UserGraveData accessMode="OWNER" setUpdate={setUpdate} update={update}/>
+            </>
             }
         </>
     );

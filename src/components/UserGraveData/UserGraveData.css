@@ -1,11 +1,11 @@
 
-.ug-row{
+.ug-row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.ug-div{
+.ug-div {
     min-width: 180px;
     font-size: 0.3rem;
     margin: 10px;
@@ -13,31 +13,32 @@
 
 }
 
-.ug-img{
+.ug-img {
     height: 50px;
 
 }
-.ug-img-down{
+
+.ug-img-down {
     margin-top: 30px;
     height: 50px;
 }
 
-.ug-date{
+.ug-date {
     font-size: 0.1rem;
     font-style: italic;
     min-width: 50px;
 }
 
-.ug-occupant{
+.ug-occupant {
     font-size: 0.8rem;
     font-weight: bold;
 }
 
-.ug-text{
+.ug-text {
     font-size: 0.4rem;
 }
 
-.ug-permission-li{
+.ug-permission-li {
     height: 32px;
     background-color: beige;
     border: 1px solid black;
@@ -47,25 +48,28 @@
     justify-content: space-around;
     align-items: center;
 }
-.ug-user-span{
+
+.ug-user-span {
     width: 80px;
 }
-.ug-access-span{
+
+.ug-access-span {
     width: 60px;
 }
 
-.ug-button{
+.ug-button {
     display: inline-block;
     height: 20px;
     width: 20px;
     margin-right: 3px;
 }
 
-.ug-button.delgrave{
+.ug-button.delgrave {
     margin-left: 30px;
     marging-right: 30px;
 }
-.ug-button-img{
+
+.ug-button-img {
     height: 16px;
     width: 16px;
     display: block;

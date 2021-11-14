@@ -19,11 +19,11 @@ function Grave() {
     const [tearError, setTearError] = useState(null);
     const [graveUpdate, setGraveUpdate] = useState(null);
     const {loggedIn, user, userDetails} = useContext(AuthContext);
-    const [canWrite, setCanWrite] = useState( false );
+    const [canWrite, setCanWrite] = useState(false);
 
     useEffect(
         () => {
-            async function waitForData(){
+            async function waitForData() {
                 await fetchGraveData();
             }
 
@@ -32,8 +32,8 @@ function Grave() {
         [graveId, graveUpdate]
     );
 
-    function calculateAccess( grave ){
-        setGraveData( grave );
+    function calculateAccess(grave) {
+        setGraveData(grave);
 
         // authority looks like this:
         // {
@@ -48,32 +48,32 @@ function Grave() {
         // ADMIN can technically write too, this is not enabled in the GUI,
         // it could be by testing on user === admin, but we don't
 
-        const myrights = grave.authorities.filter( a => a.userId === userDetails.userId );
-        if ( myrights.length &&
-            (myrights[0].authority === 'WRITE' || myrights[0].authority === 'OWNER') ) setCanWrite( true);
+        const myrights = grave.authorities.filter(a => a.userId === userDetails.userId);
+        if (myrights.length &&
+            (myrights[0].authority === 'WRITE' || myrights[0].authority === 'OWNER')) setCanWrite(true);
     }
 
     async function fetchGraveData() {
         try {
             const graveURL = `http://${backendHost()}/api/v1/graves/${graveId}`;
             const JWT = localStorage.getItem('herdenkToken');
-            const config   = {headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + JWT}};
+            const config = {headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + JWT}};
 
-            const result = await axios.get(graveURL,config);
+            const result = await axios.get(graveURL, config);
 
-            calculateAccess( result.data );
+            calculateAccess(result.data);
         } catch (e) {
             console.error(`Could not get grave data ${e}`);
         }
     }
 
-    async function sendGift( gift ) {
+    async function sendGift(gift) {
         try {
             const reactionURL = `http://${backendHost()}/api/v1/reactions/token/${graveId}/${gift}`;
             const JWT = localStorage.getItem('herdenkToken');
-            const config   = {headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + JWT}};
+            const config = {headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + JWT}};
 
-            const result = await axios.post( reactionURL,'',config);
+            const result = await axios.post(reactionURL, '', config);
             // result is a one element array of reactions
 
             const reaction = result.data[0];
@@ -81,18 +81,22 @@ function Grave() {
             if (reaction.type === 'TEAR') setGiftedTears([...giftedTears, reaction.userName]);
 
         } catch (e) {
-            console.error('Could not get grave data ', e.response ? e.response.data.message : e  );
+            console.error('Could not get grave data ', e.response ? e.response.data.message : e);
         }
     }
 
-    function displayAWhile( message, gift ){
-        if ( gift === 'FLOWER'){
-            setFlowerError( message );
-            setTimeout(() => { setFlowerError(null)}, 8000);
+    function displayAWhile(message, gift) {
+        if (gift === 'FLOWER') {
+            setFlowerError(message);
+            setTimeout(() => {
+                setFlowerError(null)
+            }, 8000);
         }
-        if ( gift === 'TEAR'){
-            setTearError( message );
-            setTimeout(() => { setTearError(null)}, 8000);
+        if (gift === 'TEAR') {
+            setTearError(message);
+            setTimeout(() => {
+                setTearError(null)
+            }, 8000);
         }
     }
 
@@ -101,21 +105,20 @@ function Grave() {
         if (e.target.id === 'flowers') {
             gift = 'FLOWER';
             if (giftedFlowers.includes(user)) {
-                displayAWhile( `${user} gaf al bloemen`, gift);
+                displayAWhile(`${user} gaf al bloemen`, gift);
                 return;
             }
         }
         if (e.target.id === 'tears') {
             gift = 'TEAR';
             if (giftedTears.includes(user)) {
-                displayAWhile( `${user} heeft al een traan gelaten`, gift);
+                displayAWhile(`${user} heeft al een traan gelaten`, gift);
                 return;
             }
         }
         if (gift === '') return;
-        await sendGift( gift );
+        await sendGift(gift);
     }
-
 
 
     let first = 2;
@@ -163,7 +166,8 @@ function Grave() {
                 {graveData.reactions &&
                 graveData.reactions.map((r) => {
                         if (first) first--;
-                        return (<Reaction reaction={r} first={first} graveUpdater={setGraveUpdate} key={`reaction-${r.reactionId}`} />);
+                        return (<Reaction reaction={r} first={first} graveUpdater={setGraveUpdate}
+                                          key={`reaction-${r.reactionId}`}/>);
                     }
                 )
                 }
@@ -172,7 +176,7 @@ function Grave() {
                 }
             </>
             }
-            { (!loggedIn || !graveData.reactions) &&
+            {(!loggedIn || !graveData.reactions) &&
             <h4>U heeft geen toegang tot dit graf</h4>
             }
         </>

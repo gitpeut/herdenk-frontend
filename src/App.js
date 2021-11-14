@@ -1,4 +1,3 @@
-
 import React, {useContext} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
@@ -19,47 +18,47 @@ function App() {
     return (
         <>
             <NavBar/>
-                <Switch>
+            <Switch>
 
-                    <Route exact path="/">
-                        {loggedIn &&
-                            <div className="content">
-                                <Churchyard/>
-                            </div>
-                        }
-                        {!loggedIn &&
-                        <div className="content">
-                            <ShowLogo size="big"/>
-                            Welkom op Herdenk, een virtueel kerkhof.
-                        </div>
-                        }
-                    </Route>
-                    <PrivateRoute path="/profile" isAuthenticated={loggedIn}>
-                        <div className="profile-content">
+                <Route exact path="/">
+                    {loggedIn &&
+                    <div className="content">
+                        <Churchyard/>
+                    </div>
+                    }
+                    {!loggedIn &&
+                    <div className="content">
+                        <ShowLogo size="big"/>
+                        Welkom op Herdenk, een virtueel kerkhof.
+                    </div>
+                    }
+                </Route>
+                <PrivateRoute path="/profile" isAuthenticated={loggedIn}>
+                    <div className="profile-content">
                         <Profile/>
-                        </div>
-                    </PrivateRoute>
-                    <PrivateRoute path="/grave/:graveId" isAuthenticated={loggedIn}>
-                        <div className="profile-content">
-                            <Grave />
-                        </div>
-                    </PrivateRoute>
-                    <PrivateRoute path="/newgrave" isAuthenticated={loggedIn}>
-                        <div className="profile-content">
-                            <NewGrave />
-                        </div>
-                    </PrivateRoute>
-                    <Route exact path="/signin">
-                        <div className="content">
-                            <SignIn/>
-                        </div>
-                    </Route>
-                    <Route exact path="/signup">
-                        <div className="content">
-                            <SignUp/>
-                        </div>
-                    </Route>
-                </Switch>
+                    </div>
+                </PrivateRoute>
+                <PrivateRoute path="/grave/:graveId" isAuthenticated={loggedIn}>
+                    <div className="profile-content">
+                        <Grave/>
+                    </div>
+                </PrivateRoute>
+                <PrivateRoute path="/newgrave" isAuthenticated={loggedIn}>
+                    <div className="profile-content">
+                        <NewGrave/>
+                    </div>
+                </PrivateRoute>
+                <Route exact path="/signin">
+                    <div className="content">
+                        <SignIn/>
+                    </div>
+                </Route>
+                <Route exact path="/signup">
+                    <div className="content">
+                        <SignUp/>
+                    </div>
+                </Route>
+            </Switch>
         </>
     );
 }

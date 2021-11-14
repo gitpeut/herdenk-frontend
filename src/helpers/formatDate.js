@@ -1,5 +1,4 @@
-
-function formatDate( IsoDateString ){
+function formatDate(IsoDateString) {
 
     const dateOptions = {
         weekday: 'long',
@@ -10,7 +9,7 @@ function formatDate( IsoDateString ){
         minute: 'numeric'
     };
 
-    const date = new Date( IsoDateString );
+    const date = new Date(IsoDateString);
     return date.toLocaleString('nl-NL', dateOptions);
 }
 
