@@ -1,15 +1,21 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import axios from "axios";
 import backendHost from "../../helpers/backendHost";
 import {useForm} from "react-hook-form";
 import './Reaction.css';
 import foto from '../../assets/png/foto.png';
 
-function PostReaction({graveId, graveUpdater }) {
+function PostReaction({graveId, graveUpdater}) {
     const [errorMessage,setErrorMessage] = useState();
-    const {register, handleSubmit} = useForm({
-        mode: "onBlur", // update errors when field goes out of focus
+    const {register, handleSubmit,setValue} = useForm({
+        mode: "onBlur",
+        reValidateMode: 'onBlur',
+        defaultValues: {
+            text: '',
+            media: '',
+        },// update errors when field goes out of focus
     });
+
 
     async function validateSubmit(data) {
 
@@ -55,6 +61,13 @@ function PostReaction({graveId, graveUpdater }) {
                 })
                 .then(res => {
                     console.log("response from server: ", res);
+                    try{
+                        //reset form fields on successful submit
+                        setValue('text', '', { shouldValidate: false });
+                        setValue('media', '', { shouldValidate: false });
+                    }catch(e){
+                        console.log('set value failed', e);
+                    }
                     graveUpdater( res.data );
                 });
         }catch(e){
@@ -72,7 +85,8 @@ function PostReaction({graveId, graveUpdater }) {
                               maxLength: {
                                   value: 2040,
                                   message: "text mag maximaal 2040 tekens bevatten",
-                              }
+                              },
+
                           },
                       )}
                       id="text"

@@ -1,9 +1,9 @@
-import React, {createContext, useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import backendHost from "../helpers/backendHost";
 
-export const AuthContext = createContext({});
+export const AuthContext = React.createContext({});
 
 function AuthContextProvider({children}) {
     const [loggedIn, setLoggedIn] = useState({
@@ -50,6 +50,9 @@ function AuthContextProvider({children}) {
 
     async function login() {
         //return true (or false) when logged in, so this can be acted upon at form submit
+        //random success guaranteed
+        //const validAccount = ((Math.random() * 10) & 1) ? true : false;
+
         // get JWT token, if available
 
         const JWT = localStorage.getItem('herdenkToken');
@@ -69,7 +72,6 @@ function AuthContextProvider({children}) {
                     user: decodedToken.email,
                 }
             );
-
 
             const rc = await getUserDetails(JWT);
 

@@ -8,7 +8,7 @@ function ShowLogo( {size} ) {
     let sizeClass = 'Logo-big';
     let divClass  = 'Logo-div-small';
     let titleClass = 'Logo-title';
-    let logoTitle   = 'Home page';
+    let logoTitle   = 'Churchyard page';
 
     switch (size) {
         case 'small-logo-only':

@@ -1,0 +1,16 @@
+
+.ch-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ch-grave{
+    max-width: 300px;
+    max-height: 300px;
+
+    margin: 20px;
+
+}

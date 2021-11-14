@@ -19,7 +19,7 @@ import axios from "axios";
 // }
 
 
-function Reaction( {reaction, first } ) {
+function Reaction( {reaction, first, graveUpdater } ) {
     const [errorMessage,setErrorMessage] = useState();
     if ( reaction.type !== 'TEXT' && reaction.type !== 'MEDIA' ) return (<></>);
 
@@ -54,7 +54,7 @@ function Reaction( {reaction, first } ) {
                 })
                 .then(res => {
                     console.log("response from server: ", res);
-                    window.location.reload();
+                    graveUpdater( res );
                 });
         }catch(e){
           setErrorMessage( "verwijderen mislukt");

@@ -2,18 +2,24 @@
 .ug-row{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .ug-div{
-    min-width: 120px;
+    min-width: 180px;
     font-size: 0.3rem;
     margin: 10px;
     padding: 5px;
+
 }
 
 .ug-img{
     height: 50px;
 
+}
+.ug-img-down{
+    margin-top: 30px;
+    height: 50px;
 }
 
 .ug-date{
@@ -23,10 +29,44 @@
 }
 
 .ug-occupant{
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     font-weight: bold;
 }
 
 .ug-text{
     font-size: 0.4rem;
+}
+
+.ug-permission-li{
+    height: 32px;
+    background-color: beige;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.ug-user-span{
+    width: 80px;
+}
+.ug-access-span{
+    width: 60px;
+}
+
+.ug-button{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin-right: 3px;
+}
+
+.ug-button.delgrave{
+    margin-left: 30px;
+    marging-right: 30px;
+}
+.ug-button-img{
+    height: 16px;
+    width: 16px;
+    display: block;
 }

@@ -2,7 +2,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
 
+.grave-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 30px;
 }
 
 .grave-gifts{
@@ -17,5 +23,42 @@
 }
 
 .grave-title{
-    text-shadow: -2px 2px darkgrey;
+    text-shadow: 1px 1px darkgrey;
+}
+
+.grave-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #aaaaaa;
+    padding: 32px;
+    max-width: 300px;
+    box-shadow: 4px 2px 2px darkgray;
+    border-radius: 4px;
+    justify-content: center;
+}
+
+.grave-label {
+    margin: 4px 0;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.grave-input {
+    width: 100%;
+    padding: 4px 8px;
+    margin: 6px 0;
+}
+
+.grave-checkbox{
+    margin: 10px;
+}
+
+.grave-button {
+    border-radius: 4px;
+    border: none;
+    height: 30px;
+    margin-top: 30px;
+    padding: 0.1vw 2vw;
+    background-color: lightgray ;
+    color: black;
 }

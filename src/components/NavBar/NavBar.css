@@ -2,11 +2,13 @@ nav {
     background-color: #cccccc;
     color: white;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     padding-bottom: 5px;
     padding-right: 20px;
     padding-left: 20px;
-    align-items: center;
-    justify-content: space-between;
+
     max-height: 50px;
     min-height: 30px;
     width: 100vw;

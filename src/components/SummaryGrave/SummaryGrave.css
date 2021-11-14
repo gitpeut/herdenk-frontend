@@ -1,0 +1,41 @@
+
+.sg-main{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: space-evenly;
+
+    width: 10vw;
+    height: 17vw;
+    margin: 1vw;
+    padding: 1vw;
+
+    background-color: #dddddd;
+    box-shadow: 1px 1px 1px darkgray;
+
+}
+
+.sg-above{
+    z-index: 2;
+    border: 1px black solid;
+    padding: 2px;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.sg-stone{
+    height: 50px;
+}
+
+.sg-askwrite{
+    height: 12px;
+    background-color: #dddddd;
+}
+
+.sg-epitaph{
+    height: 0.8rem;
+    font-size: 0.5rem;
+    color: black;
+}

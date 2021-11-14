@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import './ToProfile.css'
-import head from '../../assets/png/account.png';
+import head from '../../assets/account.png';
 import {AuthContext} from "../../context/AuthContext";
 import {useLocation,Link} from "react-router-dom";
 

@@ -11,6 +11,8 @@ import {AuthContext} from "./context/AuthContext";
 import './App.css';
 import ShowLogo from "./components/Logo/Logo";
 import Grave from "./pages/Grave/Grave";
+import NewGrave from "./pages/Grave/NewGrave";
+import Churchyard from "./pages/Churchyard/Churchyard";
 
 function App() {
     const {loggedIn} = useContext(AuthContext);
@@ -18,11 +20,19 @@ function App() {
         <>
             <NavBar/>
                 <Switch>
+
                     <Route exact path="/">
+                        {loggedIn &&
+                            <div className="content">
+                                <Churchyard/>
+                            </div>
+                        }
+                        {!loggedIn &&
                         <div className="content">
-                        <ShowLogo size="big"/>
-                        Welkom op Herdenk, een virtueel kerkhof.
+                            <ShowLogo size="big"/>
+                            Welkom op Herdenk, een virtueel kerkhof.
                         </div>
+                        }
                     </Route>
                     <PrivateRoute path="/profile" isAuthenticated={loggedIn}>
                         <div className="profile-content">
@@ -32,6 +42,11 @@ function App() {
                     <PrivateRoute path="/grave/:graveId" isAuthenticated={loggedIn}>
                         <div className="profile-content">
                             <Grave />
+                        </div>
+                    </PrivateRoute>
+                    <PrivateRoute path="/newgrave" isAuthenticated={loggedIn}>
+                        <div className="profile-content">
+                            <NewGrave />
                         </div>
                     </PrivateRoute>
                     <Route exact path="/signin">
