@@ -78,9 +78,9 @@
     word-break: break-word;
 }
 
-.r-filebutton {
-    width: 20px;
-    height: 20px;
-    background-color: #0d3b66;
-    border: 1px solid black;
+.r-filename{
+    margin-left: 16px;
+    padding-bottom: 20px;
+    height: 2vw;
+    vertical-align: middle;
 }

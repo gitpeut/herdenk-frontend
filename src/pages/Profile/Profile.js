@@ -8,10 +8,16 @@ function Profile() {
     const {loggedIn, login} = useContext(AuthContext);
     const [update, setUpdate] = useState();
 
-    useEffect(
-        () => {
-            login();
-        }, [update]);
+    // useEffect(
+    //     () => {
+    //
+    //         async function waitForLogin() {
+    //             console.log("Profile logs in again");
+    //             await login;
+    //         }
+    //         waitForLogin();
+    //
+    //     }, [update] );
 
     return (
         <>

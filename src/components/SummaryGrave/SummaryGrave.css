@@ -3,7 +3,7 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     align-content: space-evenly;
 
@@ -29,13 +29,23 @@
     height: 50px;
 }
 
+.sg-pen{
+  height: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .sg-askwrite {
-    height: 12px;
+    height: 10px;
     background-color: #dddddd;
 }
 
 .sg-epitaph {
-    height: 0.8rem;
+    height: 1.6rem;
     font-size: 0.5rem;
     color: black;
 }
+
+

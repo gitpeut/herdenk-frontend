@@ -5,6 +5,9 @@ import backendHost from "../helpers/backendHost";
 
 export const AuthContext = React.createContext({});
 
+
+
+
 function AuthContextProvider({children}) {
     const [loggedIn, setLoggedIn] = useState({
         loggedIn: false,   // in stead of 'isAuth'
@@ -24,7 +27,6 @@ function AuthContextProvider({children}) {
         async function waitForLogin() {
             await login();
         }
-
         waitForLogin();
     }, []);
 
@@ -65,8 +67,8 @@ function AuthContextProvider({children}) {
                 decodedToken = jwtDecode(JWT);
             } catch (e) {
                 localStorage.removeItem('herdenkToken');
-
             }
+
             setLoggedIn({
                     ...loggedIn,
                     loggedIn: true,
@@ -79,6 +81,7 @@ function AuthContextProvider({children}) {
             if (rc.success) {
                 // user details has following fields:
                 // email, username and .
+
 
                 const status = {
                     ...loggedIn,
@@ -109,7 +112,7 @@ function AuthContextProvider({children}) {
             };
             setLoggedIn(status);
         }
-        return (loggedIn);
+        //return (loggedIn);
     }
 
     function logout() {

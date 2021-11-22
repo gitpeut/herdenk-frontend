@@ -18,17 +18,12 @@ import axios from "axios";
 // }
 
 
-function Reaction({reaction, first, graveUpdater}) {
+function Reaction({reaction, graveUpdater }) {
     const [errorMessage, setErrorMessage] = useState();
     if (reaction.type !== 'TEXT' && reaction.type !== 'MEDIA') return (<></>);
 
-    let divClass = "r-div normal";
-    let imgClass = "r-img normal";
-
-    if (first) {
-        divClass = "r-div big";
-        imgClass = "r-img big";
-    }
+    const divClass = "r-div big";
+    const imgClass = "r-img big";
 
     const NLDate = formatDate(reaction.creationDate);
     const reactionKey = `reactionmain-${reaction.reactionId}`;
@@ -36,7 +31,7 @@ function Reaction({reaction, first, graveUpdater}) {
     let imgURL = null;
     if (reaction.mediaPath) {
         imgURL = `http://${backendHost()}${reaction.mediaPath}`;
-        console.log('imgURL ', imgURL);
+        //console.log('imgURL ', imgURL);
     }
 
     async function deleteReaction() {
@@ -52,8 +47,8 @@ function Reaction({reaction, first, graveUpdater}) {
                         }
                 })
                 .then(res => {
+                    graveUpdater( res.data )
                     console.log("response from server: ", res);
-                    graveUpdater(res);
                 });
         } catch (e) {
             setErrorMessage("verwijderen mislukt");

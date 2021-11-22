@@ -1,6 +1,7 @@
 import stone from '../../assets/png/stone_white.png';
 import stone_private from '../../assets/stone_white_private.png';
 import pen from '../../assets/png/edit.png';
+import bril from '../../assets/png/leesbril.png';
 import {Link} from "react-router-dom";
 import './SummaryGrave.css';
 import backendHost from "../../helpers/backendHost";
@@ -19,10 +20,6 @@ import {useState} from "react";
 function SummaryGrave({grave}) {
     const [alreadyAsked, setAlreadyAsked] = useState(null);
 
-    let access = true;
-    let askWrite = false;
-    if (grave.access === 'NONE') access = false;
-    if (grave.access === 'PUBLIC' || grave.access === 'READ') askWrite = true;
 
     function displayAWhile(message) {
         setAlreadyAsked(message);
@@ -59,7 +56,7 @@ function SummaryGrave({grave}) {
 
     return (
         <div className="sg-main">
-            {access &&
+            { grave.access !== 'NONE' &&
             <Link to={`/grave/${grave.graveId}`}>
                 <img src={stone}
                      className="sg-stone"
@@ -69,24 +66,37 @@ function SummaryGrave({grave}) {
             </Link>
             }
 
-            {!access &&
+            {grave.access === 'NONE' &&
             <img src={stone_private}
                  className="sg-stone"
                  alt="Grafsteen"
-                 title={`U heeft geen toegang tot dit graf. Klik om toegang te vragen`}
-                 onClick={askReadAccess}
+                 title={`U heeft geen toegang tot dit graf. Klik om lees toegang te vragen`}
             />
             }
+
             <div className="sg-epitaph">{grave.occupantFullName}</div>
 
-            {access && askWrite &&
-            <img src={pen}
-                 className="sg-askwrite"
-                 alt="Vraag schrijfrecht"
-                 title={`U kunt het graf wel bekijken,maar u mag geen reacties plaatsen. Klik voor toestemming om reacties te plaatsen`}
-                 onClick={askWriteAccess}
-            />
-            }
+            <div className="sg-pen">
+
+                { (grave.access === 'READ' || grave.access === 'NONE') &&
+                <span>
+                <img src={pen}
+                     className="sg-askwrite"
+                     alt="Vraag schrijfrecht"
+                     title={`Klik voor toestemming om het graf te bekijken en reacties te plaatsen`}
+                     onClick={askWriteAccess}/>
+                </span>
+                }
+                <span>
+                { (grave.access !== 'OWNER' && grave.access !== 'WRITE') &&
+                    <img src={bril}
+                     className="sg-askwrite"
+                     alt="Vraag leesrecht"
+                     title={`Klik voor toestemming het graf te bekijken. U wilt geen reacties plaatsen.`}
+                     onClick={askReadAccess}/>
+                }
+                </span>
+            </div>
 
             {alreadyAsked &&
             <div className="sg-above little-red">{alreadyAsked}</div>

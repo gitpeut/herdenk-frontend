@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg2609"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="leesbril.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2611"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="6.2217172"
+     inkscape:cx="256.52082"
+     inkscape:cy="367.90486"
+     inkscape:window-width="3840"
+     inkscape:window-height="2066"
+     inkscape:window-x="1909"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2606" />
+  <g
+     inkscape:label="Laag 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:1.2"
+       id="path2692"
+       cx="43.121132"
+       cy="94.152061"
+       rx="11.481959"
+       ry="11.141752"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\herdenk-frontend\src\assets\png\leesbril.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:1.2"
+       id="path2692-3"
+       cx="68.721649"
+       cy="94.152061"
+       rx="11.481959"
+       ry="11.141752"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\herdenk-frontend\src\assets\png\leesbril.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.191;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 78.952227,89.794915 10.476706,-9.149039 5.267689,-3.966734 2.633728,0.07569 1.083135,1.16201 0.339819,1.692759"
+       id="path4742"
+       inkscape:transform-center-x="3.9444379"
+       inkscape:transform-center-y="-4.765606"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\herdenk-frontend\src\assets\png\leesbril.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.191;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 32.582878,89.387602 10.476706,-9.14904 5.267689,-3.96673 2.633728,0.0757 1.083135,1.16201 0.339819,1.69276"
+       id="path4742-3"
+       inkscape:transform-center-x="3.9444379"
+       inkscape:transform-center-y="-4.765606"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\herdenk-frontend\src\assets\png\leesbril.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 53.645347,90.451349 c 0.08353,-0.08614 0.164079,-0.168861 0.241829,-0.248171 1.994679,-2.034698 2.149543,-1.824849 3.742481,0.428592"
+       id="path5662"
+       sodipodi:nodetypes="csc"
+       inkscape:export-filename="Z:\Users\Peut\Documents\Webstorm\herdenk-frontend\src\assets\png\leesbril.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+  </g>
+</svg>

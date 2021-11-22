@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {AuthContext} from "../../context/AuthContext";
 import {Link} from 'react-router-dom';
 import './UserGraveData.css';
-import GraveSummary from "./GraveSummary";
+import GraveDetails from "./GraveDetails";
 import plus from "../../assets/png/plus.png";
 
 
@@ -26,7 +26,7 @@ function UserGraveData({accessMode, update, setUpdate}) {
             <h4>Mijn graven</h4>
             <div className="ug-row">
                 {myGraveList.map((a) => {
-                        return (<GraveSummary graveId={a.graveId} setUpdate={setUpdate} update={update}
+                        return (<GraveDetails graveId={a.graveId} setUpdate={setUpdate} update={update}
                                               key={`summary-${a.graveId}`}/>);
                     }
                 )}

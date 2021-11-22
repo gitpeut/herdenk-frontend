@@ -7,7 +7,9 @@ import foto from '../../assets/png/foto.png';
 
 function PostReaction({graveId, graveUpdater}) {
     const [errorMessage, setErrorMessage] = useState();
-    const {register, handleSubmit, setValue} = useForm({
+    const [fileName, setFileName] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+    const {register, handleSubmit, setValue, reset} = useForm({
         mode: "onBlur",
         reValidateMode: 'onBlur',
         defaultValues: {
@@ -47,6 +49,9 @@ function PostReaction({graveId, graveUpdater}) {
             );
         }
 
+        setErrorMessage(null);
+        setFileName( null);
+        setPreviewImage(null);
         const reactionURL = `http://${backendHost()}/api/v1/reactions/grave/${graveId}`;
         const JWT = localStorage.getItem('herdenkToken');
 
@@ -78,8 +83,14 @@ function PostReaction({graveId, graveUpdater}) {
 
 
     return (
-        <form onSubmit={handleSubmit(validateSubmit)} className="r-div normal" encType="multipart/form-data">
+        <form onSubmit={handleSubmit(validateSubmit)}
+              className="r-div normal" encType="multipart/form-data">
             Deel uw gedachten:
+            { previewImage &&
+                <img src={URL.createObjectURL(previewImage)}
+                     className="r-img normal" alt="kan het plaatje niet laten zien  preview" />
+
+            }
             <textarea className="r-textarea" rows="10" cols="66" wrap="soft"
                       {...register("text", {
                               maxLength: {
@@ -94,10 +105,38 @@ function PostReaction({graveId, graveUpdater}) {
             <div className="r-name-date">
 
                 <label htmlFor="media" title="Stuur een foto mee">
-                    <input className="r-hidden" type="file" {...register("media")} id="media"/>
-                    <img src={foto} className="r-50x50" alt="camera"/>
+                    <input className="r-hidden" type="file"
+                           {...register("media", {onChange: (e) => {
+                               setPreviewImage( e.target.files[0] );
+                               setFileName(e.target.files[0].name);
+                               }} )}
+                           id="media"/>
+
+                    <img src={foto} className="r-50x50" alt="camera" />
+                    { fileName &&
+                    <span className="r-filename">{fileName}</span>
+                    }
                 </label>
                 {errorMessage && <div className="little-red">{errorMessage}</div>}
+                <button type="reset" id="reset" className="r-submit" onClick={()=> {
+                    setFileName( null );
+                    setPreviewImage(null);
+                    setValue('text', '', {shouldValidate: false});
+                    setValue('media', '', {shouldValidate: false});
+                    reset({
+                        keepErrors: true,
+                        keepDirty: true,
+                        keepIsSubmitted: false,
+                        keepTouched: false,
+                        keepIsValid: false,
+                        keepSubmitCount: false,
+                    });
+                }
+                }>
+                    <>
+                        Reset
+                    </>
+                </button>
                 <button type="submit" id="submit" className="r-submit">
                     <>
                         Verstuur
