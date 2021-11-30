@@ -5,10 +5,11 @@ import backendHost from "../../helpers/backendHost";
 import formatDate from "../../helpers/formatDate";
 import './UserGraveData.css';
 import stone from '../../assets/png/stone_white.png';
-import PermissionLine from './PermissionLine';
-import cancel from "../../assets/png/cancel.png";
 import {AuthContext} from "../../context/AuthContext";
-import GraveDetailsAccess from "./GraveDetailsAccess";
+import GraveDetailsAccessRequests from "./GraveDetailsAccessRequests";
+import GraveDetailsCurrentAccess from "./GraveDetailsCurrentAccess";
+import accessToImage from "../../helpers/accessToImage";
+
 
 function GraveDetails({graveId, update, setUpdate}) {
     const [graveData, setGraveData] = useState({});
@@ -44,56 +45,57 @@ function GraveDetails({graveId, update, setUpdate}) {
         }, [graveId, update]);
 
 
-    let first = true;
-    let displayHeader = true;
+    async function deleteGrave() {
+        try {
+            const JWT = localStorage.getItem('herdenkToken');
+            //Remove the request
+            const URL = `http://${backendHost()}/api/v1/graves/${graveId}`;
+
+            const result = await axios.delete(URL, {
+                headers:
+                    {
+                        Authorization: 'Bearer ' + JWT
+                    }
+            });
+            login();
+            setUpdate(result);
+        } catch (e) {
+            console.error(`Could not delete reaction ${e}`);
+        }
+    }
+
+
     return (
-        <div key={`ugpdiv${graveId}`} className="profile-rowp">
-            <div key={`ugpsub${graveId}`} className="ug-div">
+        <div key={`${graveId}54321`} className="profile-rowp">
+            <div key={`${graveId}65432`} className="ug-div">
 
 
-                <Link to={`/grave/${graveId}` }>
+                <Link to={`/grave/${graveId}`}>
                     <img src={stone} className="ug-img" alt="stone" title={'Gemaakt op ' + graveData.date}
                          key={`ug-${graveId}-stone`}/>
                 </Link>
-                <div key={`ugdiv1${graveId}`} className="ug-occupant">
+                <div key={`${graveId}76543`} className="ug-occupant">
                     <button className="ug-button" id="delGrave" onClick={() => deleteGrave()}
-                            key={`delGrave-${graveId}`}>
-                        <img className="ug-button-img" id="cancel-img" src={cancel} alt="Graf verwijderen"
+                            key={`${graveId}87654`}>
+                        <img className="ug-button-img" id="cancel-img" src={accessToImage('CANCEL')}
+                             alt="Graf verwijderen"
                              title="Graf verwijderen" key={`delGrave-${graveId}-image`}/>
                     </button>
                 </div>
 
-                <span key={`ugdiv2${graveId}`} className="ug-occupant">{graveData.occupant}</span>
+                <span key={`${graveId}98765`} className="ug-occupant">{graveData.occupant}</span>
 
-                <GraveDetailsAccess graveData={graveData} setUpdate={setUpdate} />
-                {/*<ul key={`ugpul${graveId}`} className="ug-ul">*/}
+                {graveData.full &&
+                <>
+                    <GraveDetailsAccessRequests key={ `${graveId}98765` } graveData={{...graveData}} setUpdate={setUpdate}/>
+                    <GraveDetailsCurrentAccess  key={ `${graveId}19876` } graveData={{...graveData}} update={update} setUpdate={setUpdate}/>
+                </>
+                }
 
-                {/*    {graveData.full &&*/}
-                {/*    graveData.full.reactions.map((r) => {*/}
-                {/*            if (r.type === 'READ' || r.type === 'WRITE') {*/}
-                {/*                if (first) {*/}
-                {/*                    displayHeader = true;*/}
-                {/*                    first = false;*/}
-                {/*                } else {*/}
-                {/*                    displayHeader = false;*/}
-                {/*                }*/}
-                {/*                return (*/}
-                {/*                    <>*/}
-                {/*                        {displayHeader &&*/}
-                {/*                         <li key={0} className="ug-permission-li">Access requests</li>*/}
-                {/*                        }*/}
-                {/*                        <PermissionLine key={r.reactionId} reaction={r}*/}
-                {/*                                        parentUpdater={setUpdate}/>*/}
-                {/*                    </>*/}
-                {/*                )*/}
-                {/*            } else {*/}
-                {/*                return null;*/}
-                {/*            }*/}
-                {/*        }*/}
-                {/*    )}*/}
-                {/*</ul>*/}
+
             </div>
         </div>
+
     );
 }
 

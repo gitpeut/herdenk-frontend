@@ -2,12 +2,13 @@
 .ch-main{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /*justify-content: center;*/
     align-items: center;
     flex-wrap: wrap;
 }
 
 .ch-grave{
+    min-width: 270px;
     max-width: 300px;
     max-height: 300px;
 

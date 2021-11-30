@@ -1,7 +1,6 @@
 import React from "react";
 import './UserGraveData.css';
-import ok from '../../assets/png/ok.png';
-import cancel from  '../../assets/png/cancel.png';
+import accessToImage from "../../helpers/accessToImage";
 import backendHost from "../../helpers/backendHost";
 import axios from "axios";
 
@@ -29,7 +28,7 @@ function PermissionLine( {reaction, parentUpdater}){
                 await deleteRequest(reaction);
                 break;
             } catch (e) {
-                console.error(`Failed to set authority with ${methods[method]}: ${e}`);
+                console.log(`Failed to set authority with ${methods[method]}, trying again : ${e}`);
 
             }
         }
@@ -65,20 +64,22 @@ async function assessAccessRequest(e){
 }
 
     return (
-        <li className="ug-permission-li">
-            <span className="ug-user-span" key={`perm-span1-${reaction.reactionId}`}>{reaction.userName}</span>
-            <span className="ug-access-span" key={`perm-span2-${reaction.reactionId}`}>{reaction.type}</span>
-            <button className="ug-button" id="cancel" onClick={() => assessAccessRequest('no')}
-                    key={`no-${reaction.reactionId}`}>
-                <img className="ug-button-img" id="cancel-img" src={cancel} alt="afkeuren" title="afkeuren"
-                     key={`no-img-${reaction.reactionId}`}/>
-            </button>
-            <button className="ug-button" id="ok" onClick={() => assessAccessRequest('yes')}
-                    key={`yes-${reaction.reactionId}`}>
-                <img className="ug-button-img" id="ok-img" src={ok} alt="goedkeuren" title="goedkeuren"
-                     key={`yes-img-${reaction.reactionId}`}/>
-            </button>
-        </li>
+
+                <li className="ug-li ug-permission">
+                    <span className="ug-user-span" key={`perm-span1-${reaction.reactionId}`}>{reaction.userName}</span>
+                    <span className="ug-access-span" key={`perm-span2-${reaction.reactionId}`}>{reaction.type}</span>
+                    <button className="ug-button" id="cancel" onClick={() => assessAccessRequest('no')}
+                            key={`no-${reaction.reactionId}`}>
+                        <img className="ug-button-img" id="cancel-img" src={accessToImage("NO")} alt="afkeuren" title="afkeuren"
+                             key={`no-img-${reaction.reactionId}`}/>
+                    </button>
+                    <button className="ug-button" id="ok" onClick={() => assessAccessRequest('yes')}
+                            key={`yes-${reaction.reactionId}`}>
+                        <img className="ug-button-img" id="ok-img" src={ accessToImage("GOOD")} alt="goedkeuren" title="goedkeuren"
+                             key={`yes-img-${reaction.reactionId}`}/>
+                    </button>
+                </li>
+
     );
 
 }

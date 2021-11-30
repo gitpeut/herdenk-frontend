@@ -29,7 +29,7 @@ function SignIn() {
 
             return (rc);
         } catch (e) {
-            if ('response' in e) rc.result = e.response.data;
+            if ('response' in e) rc.result = e.response.data.message;
             return (rc);
         }
     }
@@ -38,7 +38,7 @@ function SignIn() {
         const rc = await postLogin(data.email, data.password);
         if (rc.success) {
             await login();
-            history.push('/profile');
+            history.push('/');
         } else {
             setLoginError(rc.result);
         }

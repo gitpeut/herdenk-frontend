@@ -23,30 +23,80 @@
 
 .r-div.normal {
     width: 50vw;
-    font-size: 0.7rem;
+    font-size: 1.5vw;
+    min-font-size: 5pt;
+}
+
+.r-div.text {
+    width: 95%;
+    font-size: 2vw;
+    min-font-size: 10pt;
+    border: 0;
+    border-radius: 1px;
+    box-shadow: 1px 1px 1px lightgray;
+    white-space: pre-wrap;
 }
 
 .r-center {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .r-div.big {
     width: 62vw;
-    font-size: 0.8rem;
+    font-size: 2vw;
+    min-font-size: 5pt;
     border-color: black;
+    padding: 0;
+
 }
 
 .r-name-date {
     display: flex;
+    width: 100%;
     flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    justify-content: space-around;
+    background-color: floralwhite;
+    border-radius: 5px;
+    padding: 4px;
+    color: #222222;
+}
+
+.top{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.bottom{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+
+.little-letters{
+    font-size: 1.8vw;
+    min-font-size: 8pt;
+}
+
+.img-title{
+    font-size: 1.2vw;
+    font-style: italic;
+    min-font-size: 4pt;
+    display: flex;
+    justify-content: center;
 }
 
 .r-50x50 {
+    height: 1vw;
+    min-height: 30px;
+}
+
+.r-submit {
     height: 2vw;
     min-height: 30px;
+    min-width: 30px;
+    font-size: 2vw;
 }
 
 .r-12x12 {
@@ -54,10 +104,6 @@
     min-height: 12px;
 }
 
-.r-submit {
-    height: 2vw;
-    min-height: 30px;
-}
 
 .r-hidden {
     display: none;
@@ -73,9 +119,12 @@
     border: none;
     outline: none;
     resize: none;
+    overflow: hidden;
     background-color: aliceblue;
     font-size: 0.7rem;
     word-break: break-word;
+    min-height: 50px;
+    max-height: 300px;
 }
 
 .r-filename{
@@ -83,4 +132,6 @@
     padding-bottom: 20px;
     height: 2vw;
     vertical-align: middle;
+    font-size: 1.8vw;
+    font-style: italic;
 }

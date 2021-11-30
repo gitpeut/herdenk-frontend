@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect } from 'react';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import backendHost from "../helpers/backendHost";
@@ -8,131 +8,108 @@ export const AuthContext = React.createContext({});
 
 
 
+
 function AuthContextProvider({children}) {
-    const [loggedIn, setLoggedIn] = useState({
+    const [loginStatus, setLoginStatus] = useState({
         loggedIn: false,   // in stead of 'isAuth'
         user: null,
         userDetails: null,
         loginReady: false, // in stead of 'status'
+        login: login,
+        logout: logout,
     });
 
-    const autStatus = useRef({
-            ...loggedIn,
-            login: login,
-            logout: logout,
-        }
-    );
 
     useEffect(() => {
         async function waitForLogin() {
-            await login();
+            await loginStatus.login();
         }
         waitForLogin();
-    }, []);
+    }, [] );
 
-    async function getUserDetails(accessToken) {
+
+    async function getUserDetails( JWT ) {
         const rc = {success: false, result: null};
-
         try {
-            rc.result = await axios.get(`http://${backendHost()}/api/v1/users/me`,
-                {
-                    headers:
-                        {
-                            'Content-Type': 'application/json',
-                            Authorization: 'Bearer ' + accessToken
-                        }
-                });
+            const URL = `http://${backendHost()}/api/v1/users/me`;
+            const config = {headers: {'Content-Type': 'application/json',Authorization: 'Bearer ' + JWT}};
 
+            rc.result  = await axios.get(URL, config);
             rc.success = true;
-            return (rc);
+            return( rc );
         } catch (e) {
-            rc.result = e.response.data;
+            if ( e.response) {
+                rc.success = false;
+                rc.result = e.response.data;
+            }
             return (rc);
         }
     }
 
-    async function login() {
-        //return true (or false) when logged in, so this can be acted upon at form submit
-        //random success guaranteed
-        //const validAccount = ((Math.random() * 10) & 1) ? true : false;
+    function testJWT( JWT ){
+        let decodedToken;
+        try {
+            decodedToken = jwtDecode(JWT);
+        } catch (e) {
+            localStorage.removeItem('herdenkToken');
+            return null;
+        }
+        return decodedToken;
+    }
 
-        // get JWT token, if available
-
+    function getJWT(){
         const JWT = localStorage.getItem('herdenkToken');
+        let decodedToken = null;
+        if ( JWT ) decodedToken = testJWT( JWT );
 
-        if (JWT) {
-
-            let decodedToken;
-            try {
-                decodedToken = jwtDecode(JWT);
-            } catch (e) {
-                localStorage.removeItem('herdenkToken');
-            }
-
-            setLoggedIn({
-                    ...loggedIn,
-                    loggedIn: true,
-                    user: decodedToken.email,
-                }
-            );
-
-            const rc = await getUserDetails(JWT);
-
-            if (rc.success) {
-                // user details has following fields:
-                // email, username and .
+        if ( decodedToken === null ){
+             const status = {
+                 ...loginStatus,
+                 loggedIn: false,
+                 user: null,
+                 userDetails: null,
+                 loginReady: true,
+             };
+             setLoginStatus(status);
+        }
+        return( decodedToken ? JWT : null );
+    }
 
 
-                const status = {
-                    ...loggedIn,
-                    userDetails: rc.result.data,
-                    user: rc.result.data.fullName,
-                    loggedIn: true,
-                    loginReady: true,
-                };
-                setLoggedIn(status);
-            } else {
-                const status = {
-                    ...loggedIn,
-                    loggedIn: false,
-                    user: null,
-                    userDetails: null,
-                    loginReady: true,
-                };
-                setLoggedIn(status);
-            }
+    async function login(){
 
-        } else {
+        const JWT = getJWT()
+        if(  JWT === null ) return;
+
+        const rc = await getUserDetails( JWT );
+
+        if ( rc.success ) {
             const status = {
-                ...loggedIn,
-                loggedIn: false,
-                user: null,
-                userDetails: null,
+                ...loginStatus,
+                userDetails: rc.result.data,
+                user: rc.result.data.fullName,
+                loggedIn: true,
                 loginReady: true,
             };
-            setLoggedIn(status);
+            setLoginStatus(status);
+
         }
-        //return (loggedIn);
+        return( rc.success);
     }
 
+
     function logout() {
-        setLoggedIn({...loggedIn, loggedIn: false, userDetails: null, loginReady: true});
+        setLoginStatus({...loginStatus, loginStatus: false, userDetails: null, loginReady: true});
         localStorage.removeItem('herdenkToken');
     }
 
-    autStatus.current = {
-        ...loggedIn,
-        login: login,
-        logout: logout,
-    };
-
     return (
         <>
-            {loggedIn.loginReady ?
-                <AuthContext.Provider value={autStatus.current}>
+            {loginStatus.loginReady ?
+                <AuthContext.Provider value={{...loginStatus}}>
                     {children}
                 </AuthContext.Provider>
-                : <p>Loading...{loggedIn.loginReady ? "true" : "false"}</p>
+                : <p>Loading...{loginStatus.loginReady ? "true" : "false"}</p>
             }
         </>
 

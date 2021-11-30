@@ -4,7 +4,9 @@ import backendHost from "../../helpers/backendHost";
 import formatDate from "../../helpers/formatDate";
 import GetBlob from "../GetBlob/GetBlob";
 import trash from "../../assets/png/trash.png";
+import pen from "../../assets/png/edit.png"
 import axios from "axios";
+import useCheckReactionAccess from "../../customHooks/useCheckReactionAccess";
 
 // {
 //     "reactionId": 1,
@@ -20,59 +22,86 @@ import axios from "axios";
 
 function Reaction({reaction, graveUpdater }) {
     const [errorMessage, setErrorMessage] = useState();
+    const canChange = useCheckReactionAccess(reaction);
+
     if (reaction.type !== 'TEXT' && reaction.type !== 'MEDIA') return (<></>);
 
     const divClass = "r-div big";
     const imgClass = "r-img big";
 
     const NLDate = formatDate(reaction.creationDate);
-    const reactionKey = `reactionmain-${reaction.reactionId}`;
+    const reactionKey = `${reaction.reactionId}`;
 
     let imgURL = null;
+    let mediaTitle  = null;
+
     if (reaction.mediaPath) {
         imgURL = `http://${backendHost()}${reaction.mediaPath}`;
-        //console.log('imgURL ', imgURL);
+        mediaTitle = reaction.mediaPath.split("/").pop();
+    }
+
+    function displayAWhile(message) {
+        setErrorMessage( message );
+        setTimeout(() => {
+            setErrorMessage(null)
+        }, 8000);
     }
 
     async function deleteReaction() {
         const reactionURL = `http://${backendHost()}/api/v1/reactions/${reaction.reactionId}`;
         const JWT = localStorage.getItem('herdenkToken');
+        const config = {headers:{ Authorization: 'Bearer ' + JWT }};
 
         try {
-            await axios
-                .delete(reactionURL, {
-                    headers:
-                        {
-                            Authorization: 'Bearer ' + JWT
-                        }
-                })
-                .then(res => {
-                    graveUpdater( res.data )
-                    console.log("response from server: ", res);
-                });
-        } catch (e) {
-            setErrorMessage("verwijderen mislukt");
+                const result  = await axios.delete(reactionURL,config);
+                if ( result ) {
+                    graveUpdater(result.data)
+                    console.log("response from server: ", result);
+                }
+       } catch (e) {
+                displayAWhile("verwijderen mislukt");
         }
     }
 
+    function updateReaction(){}
 
     return (
         <div className={divClass} key={reactionKey}>
-            <div className="r-name-date" key={`${reactionKey}-1`}>
-                <div className="little-black" key={`${reactionKey}-2`}>{reaction.userName}</div>
-                <div className="little-black" key={`${reactionKey}-3`}>{NLDate}</div>
+            <div className="r-name-date top" key={`${reactionKey}1`}>
+                <div className="little-letters" key={`${reactionKey}2`}>#{reaction.reactionId} {reaction.userName}</div>
+                <div className="little-letters" key={`${reactionKey}3`}>{NLDate}</div>
                 {errorMessage && <div className="little-red">{errorMessage}</div>}
-                <img src={trash} className="r-12x12" alt="delete reaction" title="verwijder deze reactie"
+                { canChange ?
+                    <img src={trash} className="r-12x12" alt="delete reaction" title="verwijder deze reactie"
                      onClick={deleteReaction}/>
-            </div>
-            <div className="r-center">
-                {reaction.mediaPath &&
-                <GetBlob url={imgURL} classname={imgClass} blobKey={`blob-${reaction.reactionId}`}/>
+                     :
+                    <div className="r-12x12" />
                 }
             </div>
-            <div key={`${reactionKey}-4`}>
+            {reaction.mediaPath &&
+            <>
+                <div className="r-center" key={`${reactionKey}28`}>
+                    <GetBlob url={imgURL} classname={imgClass} blobKey={`blob-${reaction.reactionId}`}/>
+                </div>
+                <div className="img-title" key={`${reactionKey}27`}>
+                    {mediaTitle}
+                </div>
+            </>
+            }
+            {reaction.text.length !== 0 &&
+            <div key={`${reactionKey}4`} className="r-div text">
                 {reaction.text}
             </div>
+            }
+            <div className="r-name-date bottom" key={`${reactionKey}5`}>
+                { canChange ?
+                    <img src={pen} className="r-12x12" alt="verander reaction" title="verander deze reactie"
+                         onClick={updateReaction}/>
+                    :
+                    <div className="r-12x12" />
+                }
+            </div>
+
         </div>
     );
 

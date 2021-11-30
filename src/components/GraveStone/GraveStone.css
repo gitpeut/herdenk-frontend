@@ -11,22 +11,33 @@
     height: 17vw;
     margin: 1vw;
     padding: 1vw;
+    min-width: 120px;
+    min-height: 204px;
+
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    box-shadow:  0 0 2px 1px white;
 
     background-color: #dddddd;
-    box-shadow: 1px 1px 1px darkgray;
 
 }
 
 .sg-above {
     z-index: 2;
-    border: 1px black solid;
+    border: 1px darkgrey solid;
+    border-radius: 3px;
     padding: 2px;
-    background-color: white;
-    margin-top: 20px;
+    background-color: #eeeeee;
+    font-size: 3pt;
+    color: red;
 }
 
 .sg-stone {
     height: 50px;
+}
+
+.sg-picture{
+    width: 100%;
 }
 
 .sg-pen{
@@ -38,8 +49,12 @@
 }
 
 .sg-askwrite {
-    height: 10px;
-    background-color: #dddddd;
+    background-color: #eeeeee;
+    border: 1px black solid;
+    border-radius: 2px;
+    width: 12px;
+    height: 12px;
+    padding:2px;
 }
 
 .sg-epitaph {

@@ -38,15 +38,34 @@
     font-size: 0.4rem;
 }
 
-.ug-permission-li {
+.ug-li{
+    z-index: 0;
+    font-size: 10pt;
     height: 32px;
-    background-color: beige;
-    border: 1px solid black;
     border-radius: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    border: 1px solid black;
+}
+
+.ug-permission {
+    background-color: beige;
+}
+
+.ug-access {
+    background-color: #eeeeee;
+}
+
+.ug-header {
+    border: 1px solid black;
+    justify-content: space-between;
+    background-color: #bbbbbb;
+}
+
+.ug-li h6{
+    margin-left: 20px;
 }
 
 .ug-user-span {
@@ -66,11 +85,34 @@
 
 .ug-button.delgrave {
     margin-left: 30px;
-    marging-right: 30px;
 }
 
 .ug-button-img {
     height: 16px;
     width: 16px;
     display: block;
+}
+
+.ug-label{
+    margin: 4px 0;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.ug-label-small{
+margin: 4px 0;
+font-size: 0.4rem;
+}
+
+.ug-above {
+    z-index: 2;
+    position: absolute;
+    border: 1px darkgrey solid;
+    border-radius: 3px;
+    padding: 2px;
+    background-color: #eeeeee;
+    font-size: 3pt;
+    color: red;
+
+    margin-left: -30px;
 }

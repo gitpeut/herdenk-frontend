@@ -73,7 +73,8 @@ h2 {
 
 .little-red {
     color: red;
-    font-size: 0.6rem;
+    min-font-size: 12px;
+    font-size: 2vw;
 }
 
 .little-white {

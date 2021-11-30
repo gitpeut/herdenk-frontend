@@ -18,10 +18,9 @@ function PostReaction({graveId, graveUpdater}) {
         },// update errors when field goes out of focus
     });
 
-
     async function validateSubmit(data) {
 
-        console.log('data', data);
+        //console.log('data', data);
 
         let mediaType = 'TEXT';
         let mediaPath = null;
@@ -65,7 +64,7 @@ function PostReaction({graveId, graveUpdater}) {
                         }
                 })
                 .then(res => {
-                    console.log("response from server: ", res);
+                    //console.log("response from server: ", res);
                     try {
                         //reset form fields on successful submit
                         setValue('text', '', {shouldValidate: false});
@@ -76,22 +75,30 @@ function PostReaction({graveId, graveUpdater}) {
                     graveUpdater(res.data);
                 });
         } catch (e) {
-            setErrorMessage('Verzenden mislukt');
+            setErrorMessage('Sending failed');
         }
-
     }
 
+    function auto_grow() {
+        const element = document.getElementById("text");
+        element.style.height = "5px";
+        element.style.height = (element.scrollHeight)+"px";
+    }
 
     return (
         <form onSubmit={handleSubmit(validateSubmit)}
-              className="r-div normal" encType="multipart/form-data">
+              className="r-div big r-center" encType="multipart/form-data">
             Deel uw gedachten:
             { previewImage &&
                 <img src={URL.createObjectURL(previewImage)}
                      className="r-img normal" alt="kan het plaatje niet laten zien  preview" />
 
             }
-            <textarea className="r-textarea" rows="10" cols="66" wrap="soft"
+            { fileName &&
+            <div className="r-filename">{fileName}</div>
+            }
+
+            <textarea className="r-textarea r-div text" rows="10" cols="66" wrap="soft"
                       {...register("text", {
                               maxLength: {
                                   value: 2040,
@@ -101,8 +108,9 @@ function PostReaction({graveId, graveUpdater}) {
                           },
                       )}
                       id="text"
+                      onInput={()=>auto_grow()}
             />
-            <div className="r-name-date">
+            <div className="r-name-date bottom">
 
                 <label htmlFor="media" title="Stuur een foto mee">
                     <input className="r-hidden" type="file"
@@ -113,9 +121,6 @@ function PostReaction({graveId, graveUpdater}) {
                            id="media"/>
 
                     <img src={foto} className="r-50x50" alt="camera" />
-                    { fileName &&
-                    <span className="r-filename">{fileName}</span>
-                    }
                 </label>
                 {errorMessage && <div className="little-red">{errorMessage}</div>}
                 <button type="reset" id="reset" className="r-submit" onClick={()=> {
@@ -143,6 +148,7 @@ function PostReaction({graveId, graveUpdater}) {
                     </>
                 </button>
             </div>
+
         </form>
     );
 

@@ -1,12 +1,11 @@
-import stone from '../../assets/png/stone_white.png';
-import stone_private from '../../assets/stone_white_private.png';
+
 import pen from '../../assets/png/edit.png';
 import bril from '../../assets/png/leesbril.png';
-import {Link} from "react-router-dom";
-import './SummaryGrave.css';
+import './GraveStone.css';
 import backendHost from "../../helpers/backendHost";
 import axios from "axios";
 import {useState} from "react";
+import GetFirstImage from "../GetFirstImage/GetFirstImage";
 
 // grave summary is an object like this:
 // {
@@ -17,9 +16,8 @@ import {useState} from "react";
 // }
 
 
-function SummaryGrave({grave}) {
+function GraveStone({grave} ) {
     const [alreadyAsked, setAlreadyAsked] = useState(null);
-
 
     function displayAWhile(message) {
         setAlreadyAsked(message);
@@ -39,7 +37,7 @@ function SummaryGrave({grave}) {
             await axios.post(URL, '', config);
         } catch (e) {
             if (e.response) {
-                console.log('log message ', e.response.data.message, e.response);
+                //console.log('log message ', e.response.data.message, e.response);
                 if (e.response.status === 409) displayAWhile('Al in behandeling');
             }
             console.error(`Failed ask for write Access ${e}`);
@@ -56,29 +54,14 @@ function SummaryGrave({grave}) {
 
     return (
         <div className="sg-main">
-            { grave.access !== 'NONE' &&
-            <Link to={`/grave/${grave.graveId}`}>
-                <img src={stone}
-                     className="sg-stone"
-                     alt="Grafsteen"
-                     title={`U heeft ${grave.access} toegang`}
-                />
-            </Link>
-            }
 
-            {grave.access === 'NONE' &&
-            <img src={stone_private}
-                 className="sg-stone"
-                 alt="Grafsteen"
-                 title={`U heeft geen toegang tot dit graf. Klik om lees toegang te vragen`}
-            />
-            }
+            <GetFirstImage grave={grave} />
 
             <div className="sg-epitaph">{grave.occupantFullName}</div>
 
             <div className="sg-pen">
 
-                { (grave.access === 'READ' || grave.access === 'NONE') &&
+                { (grave.access === 'READ' || grave.access === 'NONE' || grave.access === 'PUBLIC') &&
                 <span>
                 <img src={pen}
                      className="sg-askwrite"
@@ -87,24 +70,25 @@ function SummaryGrave({grave}) {
                      onClick={askWriteAccess}/>
                 </span>
                 }
+                {alreadyAsked &&
+                <div className="sg-above">{alreadyAsked}</div>
+                }
+                { (grave.access !== 'OWNER' && grave.access !== 'WRITE' && grave.access !== 'PUBLIC' && grave.access !== 'READ') &&
                 <span>
-                { (grave.access !== 'OWNER' && grave.access !== 'WRITE') &&
                     <img src={bril}
                      className="sg-askwrite"
                      alt="Vraag leesrecht"
                      title={`Klik voor toestemming het graf te bekijken. U wilt geen reacties plaatsen.`}
                      onClick={askReadAccess}/>
-                }
                 </span>
+                }
             </div>
 
-            {alreadyAsked &&
-            <div className="sg-above little-red">{alreadyAsked}</div>
-            }
+
         </div>
     )
 
 
 }
 
-export default SummaryGrave;
+export default GraveStone;

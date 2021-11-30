@@ -1,7 +1,8 @@
 .grave-three {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+    width: 100%;
 }
 
 .grave-right {
@@ -14,13 +15,49 @@
 .grave-gifts {
     width: 40vw;
     margin: 10px;
-    cursor: pointer;
+    display: flex;
+    justify-content: left;
 }
 
+.grave-gifts.left{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.grave-gifts.right{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+
 .grave-gift {
-    width: 30px;
-    height: 30px;
+    width: 2vw;
+    height: 2vw;
+    min-height: 10px;
+    min-width: 10px;
+}
+
+.grave-gift.add{
     cursor: pointer;
+    margin: 4px;
+    border: 1px solid darkgray;
+    box-shadow:  0 0 2px 1px white;
+}
+
+.grave-gift-title{
+    min-width: 200px;
+    width: 40vw;
+}
+
+.gift-error{
+    position: absolute;
+    z-index: 2;
+    font-size: 4px;
+    color: black;
+    background-color: white;
+    padding: 2px;
 }
 
 .grave-title {

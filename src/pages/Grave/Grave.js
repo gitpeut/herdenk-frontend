@@ -82,16 +82,16 @@ function Grave() {
 
             {loggedIn && graveData.occupantFullName &&
               <>
-                <div className="grave-title" key="grave">
-                    {graveData.occupantFullName}
-                </div>
+                  <ShowGifts key={`gifts${graveData.graveId}`}
+                             giftedFlowers={giftedFlowers} setGiftedFlowers={setGiftedFlowers}
+                             giftedTears={giftedTears} setGiftedTears={setGiftedTears} graveId={graveId}
+                  >
+                      <div className="grave-title" key="grave">
+                          {graveData.occupantFullName}
+                      </div>
+                  </ShowGifts>
 
-                <ShowGifts  key={`gifts${graveData.graveId}`}
-                            giftedFlowers={giftedFlowers} setGiftedFlowers={setGiftedFlowers}
-                            giftedTears={giftedTears} setGiftedTears={setGiftedTears} graveId={graveId}
-                />
-
-                {graveData.reactions &&
+                  {graveData.reactions &&
                     graveData.reactions.map((r) => {
                         return (<Reaction reaction={r} graveUpdater={setGraveUpdate} key={`reaction-${r.reactionId}`} />);
                     }

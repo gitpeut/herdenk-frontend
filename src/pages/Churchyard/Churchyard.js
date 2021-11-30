@@ -2,7 +2,7 @@ import {useContext, useState, useEffect} from 'react';
 import {AuthContext} from "../../context/AuthContext";
 import backendHost from "../../helpers/backendHost";
 import axios from "axios";
-import SummaryGrave from "../../components/SummaryGrave/SummaryGrave";
+import GraveStone from "../../components/GraveStone/GraveStone";
 import './Churchyard.css';
 
 function Churchyard() {
@@ -26,8 +26,7 @@ function Churchyard() {
 
             const result = await axios.get(URL, config);
 
-            if (result) console.log('Result of getGraveSummary', result);
-            setGraveSummary(result.data);
+            if (result) setGraveSummary(result.data);
         } catch (e) {
             console.error(`Failed to get the summary ${e}`);
         }
@@ -41,7 +40,7 @@ function Churchyard() {
 
             graveSummary.map((grave) => {
                 return (
-                        <SummaryGrave grave={grave} key={`ch${grave.graveId}`}/>
+                        <GraveStone grave={grave} key={`ch${grave.graveId}`}/>
                 );
             })
             }

@@ -7,9 +7,9 @@ import {AuthContext} from "../../context/AuthContext";
 import '../../pages/Grave/Grave.css'
 
 
-function ShowGifts( {giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTears, graveId} ) {
-     const [flowerError, setFlowerError] = useState(null);
-     const [tearError, setTearError] = useState(null);
+function ShowGifts( {giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTears, graveId, children} ) {
+    const [flowerError, setFlowerError] = useState(null);
+    const [tearError, setTearError] = useState(null);
     const {user} = useContext(AuthContext);
 
     function displayAWhile(message, gift) {
@@ -69,44 +69,51 @@ function ShowGifts( {giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTear
 
 
     return(
-    <>
-    <div className="grave-three">
-        <img src={flowers} className="grave-gift" alt="flowers" title="Klik om een bloemetje te delen"
-             onClick={postGift}/>
-        <div id="flowers" className="grave-gifts" title="Klik om een bloemetje te delen" onClick={postGift}>
+        <>
+            <div className="grave-gift-title">
+                {children}
+            </div>
+            <div className="grave-three">
+                <div id="flowers" className="grave-gifts left" title="Klik om een bloemetje te delen" onClick={postGift}>
 
-            {giftedFlowers &&
-            giftedFlowers.map((user, index) => {
-                    return (<img src={flowers}
-                                 className="grave-gift"
-                                 alt={`Bloemetje van ${user}`}
-                                 title={user + ' gaf deze bloemen'}
-                                 key={`flower-${user}-${index}`}/>);
+                    {giftedFlowers &&
+                    giftedFlowers.map((user, index) => {
+                            return (<img src={flowers}
+                                         className="grave-gift"
+                                         alt={`Bloemetje van ${user}`}
+                                         title={user + ' gaf deze bloemen'}
+                                         key={`flower-${user}-${index}`}/>);
+                        }
+                    )}
+                </div>
+                {flowerError &&
+                <p className="gift-error">{flowerError}</p>
                 }
-            )}
-            {flowerError &&
-            <p className="little-black">{flowerError}</p>
-            }
-        </div>
-        <div id="tears" className="grave-gifts" onClick={postGift} title="Klik om uw traan bij te zetten">
-            {giftedTears &&
-            giftedTears.map((user, index) => {
-                    return (<img src={tear}
-                                 className="grave-gift"
-                                 alt={`${user} plengt een traan`}
-                                 title={user + ' liet deze traan'}
-                                 key={`tear-${user}-${index}`}/>);
-                }
-            )}
-            {tearError &&
-            <p className="little-black">{tearError}</p>
-            }
+                <img src={flowers} className="grave-gift add" alt="flowers" onClick={postGift}
+                     title="Klik om een bloemetje te delen"/>
 
-        </div>
-        <img src={tear} className="grave-gift" alt="tears" onClick={postGift} title="Klik om uw traan bij te zetten"/>
-    </div>
-    </>
-);
+
+                <img src={tear} className="grave-gift add" alt="tears" onClick={postGift}
+                     title="Klik om uw traan bij te zetten"/>
+                {tearError &&
+                <p className="gift-error">{tearError}</p>
+                }
+
+                <div id="tears" className="grave-gifts right" onClick={postGift} title="Klik om uw traan bij te zetten">
+                    {giftedTears &&
+                    giftedTears.map((user, index) => {
+                            return (<img src={tear}
+                                         className="grave-gift"
+                                         alt={`${user} plengt een traan`}
+                                         title={user + ' liet deze traan'}
+                                         key={`tear-${user}-${index}`}/>);
+                        }
+                    )}
+
+                </div>
+            </div>
+        </>
+    );
 
 }
 export default ShowGifts;

@@ -35,7 +35,7 @@ function NavBar() {
                             history.push('/');
                         }}
                     >
-                        Log out
+                        Log uit
                     </button>
                 </>
                 }
