@@ -5,9 +5,7 @@ import {AuthContext} from "../../context/AuthContext";
 import {useParams} from "react-router-dom";
 import Reaction from "../../components/Reaction/Reaction";
 import './Grave.css';
-import PostReaction from "../../components/Reaction/PostReaction";
 import ShowGifts from "../../components/GraveGifts/ShowGifts";
-
 
 
 function Grave() {
@@ -72,6 +70,7 @@ function Grave() {
                 }
                 return null;
             }
+
             fetchGraveData();
         }, [graveId, graveUpdate]
     );
@@ -81,24 +80,26 @@ function Grave() {
         <>
 
             {loggedIn && graveData.occupantFullName &&
-              <>
-                  <ShowGifts key={`gifts${graveData.graveId}`}
-                             giftedFlowers={giftedFlowers} setGiftedFlowers={setGiftedFlowers}
-                             giftedTears={giftedTears} setGiftedTears={setGiftedTears} graveId={graveId}
-                  >
-                      <div className="grave-title" key="grave">
-                          {graveData.occupantFullName}
-                      </div>
-                  </ShowGifts>
+            <>
+                <ShowGifts key={`gifts${graveData.graveId}`}
+                           giftedFlowers={giftedFlowers} setGiftedFlowers={setGiftedFlowers}
+                           giftedTears={giftedTears} setGiftedTears={setGiftedTears} graveId={graveId}
+                >
+                    <div className="grave-title" key="grave">
+                        {graveData.occupantFullName}
+                    </div>
+                </ShowGifts>
 
-                  {graveData.reactions &&
-                    graveData.reactions.map((r) => {
-                        return (<Reaction reaction={r} graveUpdater={setGraveUpdate} key={`reaction-${r.reactionId}`} />);
+                {graveData.reactions &&
+                graveData.reactions.map((r) => {
+                        return (<Reaction reaction={r} graveUpdater={setGraveUpdate} key={`reaction-${r.reactionId}`}/>);
                     }
                 )
                 }
+
                 {canWrite &&
-                <PostReaction graveId={graveData.graveId} graveUpdater={setGraveUpdate}/>
+                <Reaction reaction={{graveId: graveData.graveId, reactionId: 'new', type: 'TEXT', text: ''}}
+                          graveUpdater={setGraveUpdate} key={`reaction-new`}/>
                 }
             </>
             }

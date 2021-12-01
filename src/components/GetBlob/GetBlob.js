@@ -36,8 +36,13 @@ function GetBlob({url, classname, blobKey}) {
         waitForImage();
     }, [url]);
 
+
     return (
+        <>
+        {url &&
         <img src={image} alt={`plaatje`} className={classname} key={blobKey}/>
+        }
+        </>
     );
 }
 

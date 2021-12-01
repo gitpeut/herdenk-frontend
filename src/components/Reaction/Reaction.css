@@ -93,10 +93,12 @@
 }
 
 .r-submit {
-    height: 2vw;
-    min-height: 30px;
-    min-width: 30px;
-    font-size: 2vw;
+    height: 1.6vw;
+    min-height: 20px;
+    min-width: 20px;
+    font-size: 1.2vw;
+    border: 0;
+    background-color: transparent;
 }
 
 .r-12x12 {
@@ -104,6 +106,10 @@
     min-height: 12px;
 }
 
+.r-16x16 {
+    height: 1.6vw;
+    min-height: 16px;
+}
 
 .r-hidden {
     display: none;
@@ -134,4 +140,25 @@
     vertical-align: middle;
     font-size: 1.8vw;
     font-style: italic;
+}
+
+.r-show{
+    display: inline-block;
+}
+
+.r-noshow{
+    display: none;
+}
+
+.r-above {
+    z-index: 2;
+    position: absolute;
+    border: 1px darkgrey solid;
+    border-radius: 3px;
+    padding: 2px;
+    background-color: #eeeeee;
+    font-size: 3pt;
+    color: red;
+
+    margin-left: -30px;
 }

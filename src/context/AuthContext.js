@@ -5,10 +5,6 @@ import backendHost from "../helpers/backendHost";
 
 export const AuthContext = React.createContext({});
 
-
-
-
-
 function AuthContextProvider({children}) {
     const [loginStatus, setLoginStatus] = useState({
         loggedIn: false,   // in stead of 'isAuth'

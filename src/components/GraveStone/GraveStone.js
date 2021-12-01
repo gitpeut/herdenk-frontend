@@ -83,8 +83,6 @@ function GraveStone({grave} ) {
                 </span>
                 }
             </div>
-
-
         </div>
     )
 

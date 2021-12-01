@@ -9,7 +9,7 @@ function formatDate(IsoDateString) {
         minute: 'numeric'
     };
 
-    const date = new Date(IsoDateString);
+    const date = IsoDateString ? new Date(IsoDateString) : new Date();
     return date.toLocaleString('nl-NL', dateOptions);
 }
 

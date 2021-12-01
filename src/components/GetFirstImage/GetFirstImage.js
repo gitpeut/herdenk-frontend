@@ -57,7 +57,7 @@ function GetFirstImage( {grave} ) {
                     await getImage(`http://${backendHost()}${firstImageURL}`);
                 }
             } catch (e) {
-                console.error(`Could not get grave data ${e}`);
+                console.error(`No pictures found for grave ${graveId}: ${e}`);
                 setImage(stone);
             }
         }

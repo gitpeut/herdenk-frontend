@@ -58,7 +58,7 @@ const {user} = useContext(AuthContext);
             await getGraveSummary();
         }
 
-        if (user === reaction.userName){
+        if ( reaction.reactionId === 'new' || user === reaction.userName){
             setCanChange( true );
         }else{
             waitForGraveSummary();
