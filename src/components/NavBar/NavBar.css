@@ -14,27 +14,40 @@ nav {
     width: 100vw;
 }
 
-nav button {
-    border-radius: 4px;
-    border: none;
-    max-height: 30px;
-    padding: 0.1vw 2vw;
-    background-color: darkgray;
-    font-size: 16px;
+nav div{
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: flex-end  ;
+}
+
+.nav-small{
+    display: block;
+    font-size: 0.3rem;
     color: black;
 }
 
-/*Zorgt ervoor dat als twee buttons naast elkaar staan, er altijd ruimte tussen blijft*/
-nav button + button {
-    margin-left: 8px;
-}
-
-nav button:hover {
-    cursor: pointer;
+.nav-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: baseline;
+    width: 60px;
 }
 
 nav a,
 nav a:visited,
 nav a:active {
     color: white;
+}
+
+nav .loginout{
+    height: 20px;
+    padding: 2px;
+    cursor: pointer;
+    border: 3px solid #cccccc;
+}
+
+nav .loginout:hover{
+    border: 1px solid #cccccc;
 }

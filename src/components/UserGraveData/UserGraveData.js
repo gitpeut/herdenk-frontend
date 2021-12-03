@@ -41,15 +41,21 @@ function UserGraveData({update, setUpdate}) {
     return (
         <>
             <h4>Mijn graven</h4>
+            <Link to={`/newgrave`}>
+                <button className="ug-button" id="newGrave"
+                        key={`8new`}>
+                    <img className="ug-button-img" id="newGrave-img" src={plus}
+                         alt="Nieuw graf maken"
+                         title="Maak een nieuw graf" key={`8new-image`}/>
+                </button>
+            </Link>
             <div className="ug-row" key="graveRow">
                 {myGraveList.map((a) => {
                         return (<GraveDetails graveId={a.graveId} setUpdate={setUpdate} update={update}
                                               key={`summary-${a.graveId}`}/>);
                     }
                 )}
-                <Link to={`/newgrave`}>
-                    <img src={plus} className="ug-img-down" alt="Maak een graf" title="Maak een graf"/>
-                </Link>
+
             </div>
         </>
     );

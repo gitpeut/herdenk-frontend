@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom';
 import backendHost from "../../helpers/backendHost";
 import formatDate from "../../helpers/formatDate";
 import './UserGraveData.css';
-import stone from '../../assets/png/stone_white.png';
 import {AuthContext} from "../../context/AuthContext";
 import GraveDetailsAccessRequests from "./GraveDetailsAccessRequests";
 import GraveDetailsCurrentAccess from "./GraveDetailsCurrentAccess";
 import accessToImage from "../../helpers/accessToImage";
+import GetFirstImage from "../GetFirstImage/GetFirstImage";
 
 
 function GraveDetails({graveId, update, setUpdate}) {
@@ -50,6 +50,7 @@ function GraveDetails({graveId, update, setUpdate}) {
             const JWT = localStorage.getItem('herdenkToken');
             //Remove the request
             const URL = `http://${backendHost()}/api/v1/graves/${graveId}`;
+            if ( !window.confirm(`Wilt u echt het graf van  ${graveData.occupant} verwijderen?`) ) return;
 
             const result = await axios.delete(URL, {
                 headers:
@@ -67,12 +68,12 @@ function GraveDetails({graveId, update, setUpdate}) {
 
     return (
         <div key={`${graveId}54321`} className="profile-rowp">
-            <div key={`${graveId}65432`} className="ug-div">
-
+            <div key={`${graveId}65432`} className="ug-div stone">
 
                 <Link to={`/grave/${graveId}`}>
-                    <img src={stone} className="ug-img" alt="stone" title={'Gemaakt op ' + graveData.date}
-                         key={`ug-${graveId}-stone`}/>
+                    <GetFirstImage grave={{graveId: graveId, access: "OWNER"}} />
+                    {/*<img src={stone} className="ug-img" alt="stone" title={'Gemaakt op ' + graveData.date}*/}
+                    {/*     key={`ug-${graveId}-stone`}/>*/}
                 </Link>
                 <div key={`${graveId}76543`} className="ug-occupant">
                     <button className="ug-button" id="delGrave" onClick={() => deleteGrave()}

@@ -4,6 +4,8 @@ import {AuthContext} from "../../context/AuthContext";
 import ShowLogo from "../Logo/Logo";
 import ToProfile from "../ToProfile/ToProfile";
 import './NavBar.css';
+import login from '../../assets/png/login.png';
+import loguit from '../../assets/png/logout.png';
 
 function NavBar() {
     const history = useHistory();
@@ -17,29 +19,32 @@ function NavBar() {
             <div>
                 {!loggedIn && !currentPath.endsWith("/signin") &&
                 <>
-                    <button
-                        type="button"
-                        onClick={() => history.push('/signin')}
-                    >
-                        Log in
-                    </button>
+                    <img src={login}
+                         className="loginout"
+                         alt="login"
+                         title="log in"
+                         onClick={() => history.push('/signin')}
+                    />
                 </>
                 }
                 {loggedIn &&
                 <>
-                    <p className="little-black">Ingelogd als {user}</p>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            logout();
-                            history.push('/');
-                        }}
-                    >
-                        Log uit
-                    </button>
+                    <div className="nav-row">
+                        <ToProfile/>
+                        <img src={loguit}
+                             className="loginout"
+                             alt="logout"
+                             title="log uit"
+                             onClick={() => {
+                                 logout();
+                                 history.push('/');
+                             }}
+                        />
+                    </div>
+                    <div className="nav-small">Ingelogd als {user}</div>
                 </>
                 }
-                <ToProfile/>
+
             </div>
         </nav>
     );

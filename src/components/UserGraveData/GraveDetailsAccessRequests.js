@@ -18,7 +18,7 @@ return(
                             return (
                                 <>
                                     {(displayRequestHeader > 0) &&
-                                    <li key={0} className="ug-li  ug-permission"><h6>Access requests</h6></li>}
+                                    <li key={0} className="ug-li  ug-header ug-permission"><h6>Toegangsverzoeken</h6></li>}
                                     <PermissionLine key={r.reactionId} reaction={r} parentUpdater={setUpdate}/>
                                 </>
                             )

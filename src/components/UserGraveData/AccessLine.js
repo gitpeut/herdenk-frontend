@@ -80,6 +80,17 @@ function AccessLine( {authority, setUpdate } ){
         return accessToTitle[ access ];
     }
 
+    function currentAccess2Title( access ) {
+        const accessToTitle = {
+            READ: `${authority.userFullName} mag het graf bekijken`,
+            WRITE: `${authority.userFullName} mag reacties plaatsen`,
+            OWNER: `${authority.userFullName} is (mede)eigenaar van het graf`,
+            NONE:  `Verwijder alle rechten van ${authority.userFullName}`,
+        }
+        return accessToTitle[ access ];
+    }
+
+
     return (
         <li className="ug-li ug-access">
             <span className="ug-user-span"
@@ -88,7 +99,11 @@ function AccessLine( {authority, setUpdate } ){
             </span>
             <span className="ug-access-span"
                   key={`AccessUserAccess${authority.graveId}${authority.userId}`}>
-                {authority.access}
+                <img src={accessToImage(authority.access )}
+                     className="ug-button-img center"
+                     title={currentAccess2Title(authority.access)}
+                     alt={currentAccess2Title(authority.access)}
+                      />
             </span>
 
             {displayAuthorities.map((a) => {

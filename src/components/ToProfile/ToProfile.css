@@ -1,7 +1,13 @@
 
 .ToProfile-small-only {
     max-height: 25px;
+    border: 3px solid #cccccc;
 }
+
+.ToProfile-small-only:hover {
+    border: 1px solid #cccccc;
+}
+
 
 .ToProfile-div {
     font-family: Arial, sans-serif;

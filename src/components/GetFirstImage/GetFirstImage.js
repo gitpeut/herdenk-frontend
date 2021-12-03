@@ -10,6 +10,8 @@ function GetFirstImage( {grave} ) {
     const [ image, setImage] = useState( stone );
     const [ pictureClass, setPictureClass] = useState( 'sg-stone' );
 
+    console.log( 'getfimage grave', grave);
+
     useEffect(() => {
         async function waitForReactions() {
             await getReactions(grave.graveId);

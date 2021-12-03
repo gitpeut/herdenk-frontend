@@ -7,15 +7,42 @@
 
 .ug-div {
     min-width: 180px;
-    font-size: 0.3rem;
+    font-size: 0.3vw;
     margin: 10px;
     padding: 5px;
+
+}
+
+.ug-div.stone{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-evenly;
+
+    width: 30vw;
+    margin: 1vw;
+    padding: 1vw;
+    min-width: 230px;
+    min-height: 204px;
+
+
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    box-shadow:  0 0 2px 1px white;
+
+    background-color: #dddddd;
 
 }
 
 .ug-img {
     height: 50px;
 
+}
+
+.ug-ul{
+    margin-top: 5px;
+    width: 100%;
 }
 
 .ug-img-down {
@@ -39,19 +66,24 @@
 }
 
 .ug-li{
-    z-index: 0;
-    font-size: 10pt;
-    height: 32px;
-    border-radius: 5px;
+    font-size: 0.8rem;
+    width: 98%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid darkgray;
+    border-bottom: 0;
+    padding: 2px;
+}
+
+.ug-li:last-child{
+    border-bottom: 1px solid darkgray;
 }
 
 .ug-permission {
-    background-color: beige;
+    background-color: white;
+    justify-content: space-between;
 }
 
 .ug-access {
@@ -59,7 +91,9 @@
 }
 
 .ug-header {
-    border: 1px solid black;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid darkgray;
+    border-bottom: 0;
     justify-content: space-between;
     background-color: #bbbbbb;
 }
@@ -80,17 +114,33 @@
     display: inline-block;
     height: 20px;
     width: 20px;
+    padding: 1px 1px 1px 0;
     margin-right: 3px;
 }
 
 .ug-button.delgrave {
     margin-left: 30px;
 }
+.ug-button.down{
+    margin-top: 75px;
+}
+
+.ug-button:hover{
+    padding: 0;
+}
 
 .ug-button-img {
     height: 16px;
     width: 16px;
     display: block;
+}
+.ug-button-img.center{
+    margin: auto;
+}
+
+
+.ug-permission-buttons{
+    width: 48px;
 }
 
 .ug-label{

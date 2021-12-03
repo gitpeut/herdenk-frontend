@@ -7,15 +7,15 @@ import {useLocation, Link} from "react-router-dom";
 function ToProfile() {
     const {loggedIn} = useContext(AuthContext);
     let currentPath = useLocation().pathname;
-    const sizeClass = 'ToProfile-small-only';
+    const sizeClass = 'loginout';
     const logoTitle = 'Persoonlijke gegevens';
     return (
         <>
             {loggedIn && !currentPath.endsWith('/profile') &&
             <Link to="/profile">
-            <span className="ToProfile-div">
-            <img src={head} className={sizeClass} alt="Personal page" title={logoTitle}/>
-        </span>
+                <span className="ToProfile-div">
+                    <img src={head} className={sizeClass} alt="Personal page" title={logoTitle}/>
+                </span>
             </Link>
             }
         </>

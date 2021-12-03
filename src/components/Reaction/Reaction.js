@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import './Reaction.css';
 import backendHost from "../../helpers/backendHost";
 import formatDate from "../../helpers/formatDate";
@@ -7,10 +7,10 @@ import trash from "../../assets/png/trash.png";
 import pen from "../../assets/png/edit.png";
 import none from "../../assets/png/none.png";
 import axios from "axios";
-import useCheckReactionAccess from "../../customHooks/useCheckReactionAccess";
 import foto from "../../assets/png/foto.png";
 import nofoto from "../../assets/png/nofoto.png";
 import good from "../../assets/png/good.png";
+import {AuthContext} from "../../context/AuthContext";
 
 // {
 //     "reactionId": 1,
@@ -24,9 +24,9 @@ import good from "../../assets/png/good.png";
 // }
 
 
-function Reaction({reaction, graveUpdater }) {
+function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
+    const {user} = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState();
-    const [isNew, setIsNew]               = useState( reaction.reactionId === 'new' );
     const [updateActive, setUpdateActive] = useState( isNew );
     const [updateImage, setUpdateImage]   = useState(null);
     const [fileName, setFileName]         = useState(null);
@@ -34,7 +34,7 @@ function Reaction({reaction, graveUpdater }) {
 
     let newReaction = reaction;
 
-    const canChange = useCheckReactionAccess(reaction);
+    let canChange = ( graveCanChange || isNew || user === reaction.userName );
 
     if (reaction.type !== 'TEXT' && reaction.type !== 'MEDIA') return (<></>);
 
@@ -65,6 +65,7 @@ function Reaction({reaction, graveUpdater }) {
         const JWT = localStorage.getItem('herdenkToken');
         const config = {headers:{ Authorization: 'Bearer ' + JWT }};
 
+        if ( !window.confirm(`Wilt u echt reactie ${reaction.reactionId} van  ${reaction.userName} verwijderen?`) ) return;
         try {
                 const result  = await axios.delete(reactionURL,config);
                 if ( result ) {

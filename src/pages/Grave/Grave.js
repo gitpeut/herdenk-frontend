@@ -16,6 +16,7 @@ function Grave() {
     const [graveUpdate, setGraveUpdate] = useState(null);
     const {loggedIn} = useContext(AuthContext);
     const [canWrite, setCanWrite] = useState(false);
+    const [canChange, setCanChange]  = useState( false );
 
     useEffect(
         () => {
@@ -30,7 +31,7 @@ function Grave() {
 
                     const authority = result.data.access;
                     if (authority === 'WRITE' || authority === 'OWNER') setCanWrite(true);
-
+                    if ( authority === 'OWNER' )setCanChange( true );
                 } catch (e) {
                     console.error(`Could not get authority for grave ${graveId}: ${e}`);
                 }
@@ -92,14 +93,21 @@ function Grave() {
 
                 {graveData.reactions &&
                 graveData.reactions.map((r) => {
-                        return (<Reaction reaction={r} graveUpdater={setGraveUpdate} key={`reaction-${r.reactionId}`}/>);
+                        return (<Reaction reaction={r}
+                                          graveUpdater={setGraveUpdate}
+                                          isNew={false}
+                                          graveCanChange={canChange}
+                                          key={`reaction-${r.reactionId}`}/>);
                     }
                 )
                 }
 
                 {canWrite &&
                 <Reaction reaction={{graveId: graveData.graveId, reactionId: 'new', type: 'TEXT', text: ''}}
-                          graveUpdater={setGraveUpdate} key={`reaction-new`}/>
+                          graveUpdater={setGraveUpdate}
+                          isNew={true}
+                          graveCanChange={true}
+                          key={`reaction-new`}/>
                 }
             </>
             }
