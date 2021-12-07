@@ -19,13 +19,13 @@
     justify-content: left;
 }
 
-.grave-gifts.left{
+.grave-gifts.left {
     display: flex;
     flex-direction: row;
     justify-content: right;
 }
 
-.grave-gifts.right{
+.grave-gifts.right {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -39,19 +39,19 @@
     min-width: 10px;
 }
 
-.grave-gift.add{
+.grave-gift.add {
     cursor: pointer;
     margin: 4px;
     border: 1px solid darkgray;
-    box-shadow:  0 0 2px 1px white;
+    box-shadow: 0 0 2px 1px white;
 }
 
-.grave-gift-title{
+.grave-gift-title {
     min-width: 200px;
     width: 40vw;
 }
 
-.gift-error{
+.gift-error {
     position: absolute;
     z-index: 2;
     font-size: 4px;

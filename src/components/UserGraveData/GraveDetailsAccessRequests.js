@@ -2,34 +2,34 @@ import PermissionLine from "./PermissionLine";
 import React from "react";
 import './UserGraveData.css'
 
-function GraveDetailsAccessRequests({graveData, setUpdate} ) {
+function GraveDetailsAccessRequests({graveData, setUpdate}) {
 
-const graveId = graveData.full.graveId;
+    const graveId = graveData.full.graveId;
 
-let displayRequestHeader = 2;
-return(
+    let displayRequestHeader = 2;
+    return (
 
-            <ul key={`ugpul${graveId}`} className="ug-ul">
+        <ul key={`ugpul${graveId}`} className="ug-ul">
 
-                {graveData.full &&
-                graveData.full.reactions.map((r) => {
-                        if (r.type === 'READ' || r.type === 'WRITE') {
-                            if (displayRequestHeader) --displayRequestHeader;
-                            return (
-                                <>
-                                    {(displayRequestHeader > 0) &&
-                                    <li key={0} className="ug-li  ug-header ug-permission"><h6>Toegangsverzoeken</h6></li>}
-                                    <PermissionLine key={r.reactionId} reaction={r} parentUpdater={setUpdate}/>
-                                </>
-                            )
-                        } else {
-                            return null;
-                        }
+            {graveData.full &&
+            graveData.full.reactions.map((r) => {
+                    if (r.type === 'READ' || r.type === 'WRITE') {
+                        if (displayRequestHeader) --displayRequestHeader;
+                        return (
+                            <>
+                                {(displayRequestHeader > 0) &&
+                                <li key={0} className="ug-li  ug-header ug-permission"><h6>Toegangsverzoeken</h6></li>}
+                                <PermissionLine key={r.reactionId} reaction={r} parentUpdater={setUpdate}/>
+                            </>
+                        )
+                    } else {
+                        return null;
                     }
-                )}
-            </ul>
+                }
+            )}
+        </ul>
 
-);
+    );
 }
 
 export default GraveDetailsAccessRequests

@@ -75,16 +75,17 @@
 
 
 .little-letters{
-    font-size: 1.8vw;
-    min-font-size: 8pt;
+    font-size: 1.2vw;
+    min-font-size: 6pt;
 }
 
 .img-title{
+    width: 100%;
     font-size: 1.2vw;
     font-style: italic;
     min-font-size: 4pt;
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .r-50x50 {

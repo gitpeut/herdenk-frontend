@@ -6,14 +6,13 @@ import GraveDetailsCurrentHeader from "./GraveDetailsCurrentHeader";
 import AccessLine from "./AccessLine";
 
 
-
-function GraveDetailsCurrentAccess({graveData, update, setUpdate} ) {
+function GraveDetailsCurrentAccess({graveData, update, setUpdate}) {
     const [authorities, setAuthorities] = useState([]);
     const graveId = graveData.full.graveId;
 
 
     useEffect(
-        ()=> {
+        () => {
             async function getGraveAuthorities() {
                 try {
                     const JWT = localStorage.getItem('herdenkToken');
@@ -27,33 +26,33 @@ function GraveDetailsCurrentAccess({graveData, update, setUpdate} ) {
                 }
             }
 
-            async function waitForAuthorities(){
+            async function waitForAuthorities() {
                 await getGraveAuthorities();
             }
 
             waitForAuthorities();
-        }, [ update, graveId ]);
+        }, [update, graveId]);
 
 
     let displayRequestHeader = 2;
     return (
-            <ul key={`ulistCurrent${graveId}`} className="ug-ul">
-                {graveData.full && authorities &&
-                authorities.map((a) => {
-                    if (displayRequestHeader) --displayRequestHeader;
-                    return (
-                        <>
-                            {(displayRequestHeader > 0) &&
-                            <GraveDetailsCurrentHeader key={`header${a.userId}${a.graveId}`} graveData={graveData}
-                                                       setUpdate={setUpdate}/>
-                            }
+        <ul key={`ulistCurrent${graveId}`} className="ug-ul">
+            {graveData.full && authorities &&
+            authorities.map((a) => {
+                if (displayRequestHeader) --displayRequestHeader;
+                return (
+                    <>
+                        {(displayRequestHeader > 0) &&
+                        <GraveDetailsCurrentHeader key={`header${a.userId}${a.graveId}`} graveData={graveData}
+                                                   setUpdate={setUpdate}/>
+                        }
 
-                            <AccessLine key={`accessLine${a.userId}${a.graveId}`} authority={a} setUpdate={setUpdate}/>
-                        </>
-                    )
-                })
-                }
-            </ul>
+                        <AccessLine key={`accessLine${a.userId}${a.graveId}`} authority={a} setUpdate={setUpdate}/>
+                    </>
+                )
+            })
+            }
+        </ul>
     )
 }
 

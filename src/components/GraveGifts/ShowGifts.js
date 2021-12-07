@@ -7,7 +7,7 @@ import {AuthContext} from "../../context/AuthContext";
 import '../../pages/Grave/Grave.css'
 
 
-function ShowGifts( {giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTears, graveId, children} ) {
+function ShowGifts({giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTears, graveId, children}) {
     const [flowerError, setFlowerError] = useState(null);
     const [tearError, setTearError] = useState(null);
     const {user} = useContext(AuthContext);
@@ -55,7 +55,7 @@ function ShowGifts( {giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTear
                 return;
             }
         }
-        if (e.target.id === 'tears' || e.target.alt === 'tears' ) {
+        if (e.target.id === 'tears' || e.target.alt === 'tears') {
             gift = 'TEAR';
             if (giftedTears.includes(user)) {
                 displayAWhile(`${user} heeft al een traan gelaten`, gift);
@@ -67,14 +67,14 @@ function ShowGifts( {giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTear
     }
 
 
-
-    return(
+    return (
         <>
             <div className="grave-gift-title">
                 {children}
             </div>
             <div className="grave-three">
-                <div id="flowers" className="grave-gifts left" title="Klik om een bloemetje te delen" onClick={postGift}>
+                <div id="flowers" className="grave-gifts left" title="Klik om een bloemetje te delen"
+                     onClick={postGift}>
 
                     {giftedFlowers &&
                     giftedFlowers.map((user, index) => {
@@ -116,4 +116,5 @@ function ShowGifts( {giftedFlowers, setGiftedFlowers, giftedTears, setGiftedTear
     );
 
 }
+
 export default ShowGifts;

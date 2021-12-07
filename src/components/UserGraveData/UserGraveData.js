@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import './UserGraveData.css';
 import GraveDetails from "./GraveDetails";
@@ -8,13 +8,14 @@ import axios from "axios";
 
 
 function UserGraveData({update, setUpdate}) {
-    const [ myGraveList, setMyGraveList] = useState([]);
+    const [myGraveList, setMyGraveList] = useState([]);
 
     useEffect(
         () => {
             async function getGraves() {
-                    await getGraveList();
-              }
+                await getGraveList();
+            }
+
             getGraves();
         }, [update]);
 
@@ -22,18 +23,18 @@ function UserGraveData({update, setUpdate}) {
         try {
             const JWT = localStorage.getItem('herdenkToken');
             const URL = `http://${backendHost()}/api/v1/users/me`;
-            const config = {headers: {'Content-Type': 'application/json',Authorization: 'Bearer ' + JWT}};
+            const config = {headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + JWT}};
 
-            const result  = await axios.get(URL, config);
+            const result = await axios.get(URL, config);
 
             const list = result.data.authorities.filter(a => a.authority === 'OWNER');
             setMyGraveList(list);
 
         } catch (e) {
-            if ( e.response) {
-                console.log( ' Error getting graves ' , e.response.data );
+            if (e.response) {
+                console.log(' Error getting graves ', e.response.data);
             }
-            console.log( ' Error getting gravelist' );
+            console.log(' Error getting gravelist');
         }
     }
 

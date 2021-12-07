@@ -50,7 +50,7 @@ function GraveDetails({graveId, update, setUpdate}) {
             const JWT = localStorage.getItem('herdenkToken');
             //Remove the request
             const URL = `http://${backendHost()}/api/v1/graves/${graveId}`;
-            if ( !window.confirm(`Wilt u echt het graf van  ${graveData.occupant} verwijderen?`) ) return;
+            if (!window.confirm(`Wilt u echt het graf van  ${graveData.occupant} verwijderen?`)) return;
 
             const result = await axios.delete(URL, {
                 headers:
@@ -71,7 +71,7 @@ function GraveDetails({graveId, update, setUpdate}) {
             <div key={`${graveId}65432`} className="ug-div stone">
 
                 <Link to={`/grave/${graveId}`}>
-                    <GetFirstImage grave={{graveId: graveId, access: "OWNER"}} />
+                    <GetFirstImage grave={{graveId: graveId, access: "OWNER"}}/>
                     {/*<img src={stone} className="ug-img" alt="stone" title={'Gemaakt op ' + graveData.date}*/}
                     {/*     key={`ug-${graveId}-stone`}/>*/}
                 </Link>
@@ -88,8 +88,10 @@ function GraveDetails({graveId, update, setUpdate}) {
 
                 {graveData.full &&
                 <>
-                    <GraveDetailsAccessRequests key={ `${graveId}98765` } graveData={{...graveData}} setUpdate={setUpdate}/>
-                    <GraveDetailsCurrentAccess  key={ `${graveId}19876` } graveData={{...graveData}} update={update} setUpdate={setUpdate}/>
+                    <GraveDetailsAccessRequests key={`${graveId}98765`} graveData={{...graveData}}
+                                                setUpdate={setUpdate}/>
+                    <GraveDetailsCurrentAccess key={`${graveId}19876`} graveData={{...graveData}} update={update}
+                                               setUpdate={setUpdate}/>
                 </>
                 }
 

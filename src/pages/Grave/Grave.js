@@ -16,7 +16,7 @@ function Grave() {
     const [graveUpdate, setGraveUpdate] = useState(null);
     const {loggedIn} = useContext(AuthContext);
     const [canWrite, setCanWrite] = useState(false);
-    const [canChange, setCanChange]  = useState( false );
+    const [canChange, setCanChange] = useState(false);
 
     useEffect(
         () => {
@@ -31,7 +31,7 @@ function Grave() {
 
                     const authority = result.data.access;
                     if (authority === 'WRITE' || authority === 'OWNER') setCanWrite(true);
-                    if ( authority === 'OWNER' )setCanChange( true );
+                    if (authority === 'OWNER') setCanChange(true);
                 } catch (e) {
                     console.error(`Could not get authority for grave ${graveId}: ${e}`);
                 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import backendHost from "../helpers/backendHost";
@@ -20,21 +20,22 @@ function AuthContextProvider({children}) {
         async function waitForLogin() {
             await loginStatus.login();
         }
+
         waitForLogin();
-    }, [] );
+    }, []);
 
 
-    async function getUserDetails( JWT ) {
+    async function getUserDetails(JWT) {
         const rc = {success: false, result: null};
         try {
             const URL = `http://${backendHost()}/api/v1/users/me`;
-            const config = {headers: {'Content-Type': 'application/json',Authorization: 'Bearer ' + JWT}};
+            const config = {headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + JWT}};
 
-            rc.result  = await axios.get(URL, config);
+            rc.result = await axios.get(URL, config);
             rc.success = true;
-            return( rc );
+            return (rc);
         } catch (e) {
-            if ( e.response) {
+            if (e.response) {
                 rc.success = false;
                 rc.result = e.response.data;
             }
@@ -42,7 +43,7 @@ function AuthContextProvider({children}) {
         }
     }
 
-    function testJWT( JWT ){
+    function testJWT(JWT) {
         let decodedToken;
         try {
             decodedToken = jwtDecode(JWT);
@@ -53,33 +54,33 @@ function AuthContextProvider({children}) {
         return decodedToken;
     }
 
-    function getJWT(){
+    function getJWT() {
         const JWT = localStorage.getItem('herdenkToken');
         let decodedToken = null;
-        if ( JWT ) decodedToken = testJWT( JWT );
+        if (JWT) decodedToken = testJWT(JWT);
 
-        if ( decodedToken === null ){
-             const status = {
-                 ...loginStatus,
-                 loggedIn: false,
-                 user: null,
-                 userDetails: null,
-                 loginReady: true,
-             };
-             setLoginStatus(status);
+        if (decodedToken === null) {
+            const status = {
+                ...loginStatus,
+                loggedIn: false,
+                user: null,
+                userDetails: null,
+                loginReady: true,
+            };
+            setLoginStatus(status);
         }
-        return( decodedToken ? JWT : null );
+        return (decodedToken ? JWT : null);
     }
 
 
-    async function login(){
+    async function login() {
 
         const JWT = getJWT()
-        if(  JWT === null ) return;
+        if (JWT === null) return;
 
-        const rc = await getUserDetails( JWT );
+        const rc = await getUserDetails(JWT);
 
-        if ( rc.success ) {
+        if (rc.success) {
             const status = {
                 ...loginStatus,
                 userDetails: rc.result.data,
@@ -90,7 +91,7 @@ function AuthContextProvider({children}) {
             setLoginStatus(status);
 
         }
-        return( rc.success);
+        return (rc.success);
     }
 
 

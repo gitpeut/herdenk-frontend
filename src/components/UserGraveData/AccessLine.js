@@ -3,32 +3,32 @@ import backendHost from "../../helpers/backendHost";
 import accessToImage from "../../helpers/accessToImage";
 import axios from "axios";
 
-function AccessLine( {authority, setUpdate } ){
+function AccessLine({authority, setUpdate}) {
 
-    const [ AuthError, setAuthError ] = useState( null );
-    const allAuthorities = ['OWNER','WRITE', 'READ','NONE'];
-    const displayAuthorities = allAuthorities.filter( value => value !== authority.access );
+    const [AuthError, setAuthError] = useState(null);
+    const allAuthorities = ['OWNER', 'WRITE', 'READ', 'NONE'];
+    const displayAuthorities = allAuthorities.filter(value => value !== authority.access);
 
 
-    async function updateAuthority( newAccess) {
-            try {
-                const JWT = localStorage.getItem('herdenkToken');
-                // Add or change the access right to this grave for the requester
-                const URL = `http://${backendHost()}/api/v1/authorities/grave/${authority.graveId}/${authority.userId}/${newAccess}`;
-                const config = {headers: {Authorization: 'Bearer ' + JWT}};
+    async function updateAuthority(newAccess) {
+        try {
+            const JWT = localStorage.getItem('herdenkToken');
+            // Add or change the access right to this grave for the requester
+            const URL = `http://${backendHost()}/api/v1/authorities/grave/${authority.graveId}/${authority.userId}/${newAccess}`;
+            const config = {headers: {Authorization: 'Bearer ' + JWT}};
 
-                const result = await axios.put(URL, '', config);
+            const result = await axios.put(URL, '', config);
 
-                if (result){
-                    console.log('Result of put authority', result);
-                    setUpdate( result );
-                }
-            } catch (e) {
-                if ( e.response ) {
-                    displayAWhile( e.response.data.message );
-                }
-                console.error(`Failed to change authority: ${e}`);
+            if (result) {
+                console.log('Result of put authority', result);
+                setUpdate(result);
             }
+        } catch (e) {
+            if (e.response) {
+                displayAWhile(e.response.data.message);
+            }
+            console.error(`Failed to change authority: ${e}`);
+        }
     }
 
     async function deleteAuthority() {
@@ -39,13 +39,13 @@ function AccessLine( {authority, setUpdate } ){
 
             const result = await axios.delete(URL, config);
 
-            if (result){
-                setUpdate( result);
+            if (result) {
+                setUpdate(result);
                 console.log('Result of removing access', result);
             }
         } catch (e) {
-            if ( e.response ) {
-               displayAWhile( e.response.data.message );
+            if (e.response) {
+                displayAWhile(e.response.data.message);
             }
             console.error(`Failed to remove access from grave: ${e}`);
 
@@ -60,50 +60,50 @@ function AccessLine( {authority, setUpdate } ){
     }
 
 
-    async function assessAccessChange( newAccess ){
+    async function assessAccessChange(newAccess) {
 
-        if ( newAccess === authority.access )return;
-        if ( newAccess === 'NONE'){
+        if (newAccess === authority.access) return;
+        if (newAccess === 'NONE') {
             await deleteAuthority();
             return;
         }
-        await updateAuthority( newAccess );
+        await updateAuthority(newAccess);
     }
 
-    function access2Title( access) {
+    function access2Title(access) {
         const accessToTitle = {
             READ: `Geef ${authority.userFullName} leesrechten`,
             WRITE: `Geef ${authority.userFullName} recht om reacties te plaatsen`,
             OWNER: `Maak ${authority.userFullName} (mede)eigenaar van het graf`,
-            NONE:  `Verwijder alle rechten van ${authority.userFullName}`,
+            NONE: `Verwijder alle rechten van ${authority.userFullName}`,
         }
-        return accessToTitle[ access ];
+        return accessToTitle[access];
     }
 
-    function currentAccess2Title( access ) {
+    function currentAccess2Title(access) {
         const accessToTitle = {
             READ: `${authority.userFullName} mag het graf bekijken`,
             WRITE: `${authority.userFullName} mag reacties plaatsen`,
             OWNER: `${authority.userFullName} is (mede)eigenaar van het graf`,
-            NONE:  `Verwijder alle rechten van ${authority.userFullName}`,
+            NONE: `Verwijder alle rechten van ${authority.userFullName}`,
         }
-        return accessToTitle[ access ];
+        return accessToTitle[access];
     }
 
 
     return (
         <li className="ug-li ug-access">
             <span className="ug-user-span"
-                          key={`AccessUser${authority.graveId}${authority.userId}`}>
+                  key={`AccessUser${authority.graveId}${authority.userId}`}>
                 {authority.userFullName}
             </span>
             <span className="ug-access-span"
                   key={`AccessUserAccess${authority.graveId}${authority.userId}`}>
-                <img src={accessToImage(authority.access )}
+                <img src={accessToImage(authority.access)}
                      className="ug-button-img center"
                      title={currentAccess2Title(authority.access)}
                      alt={currentAccess2Title(authority.access)}
-                      />
+                />
             </span>
 
             {displayAuthorities.map((a) => {

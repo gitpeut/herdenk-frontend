@@ -13,7 +13,7 @@
 
 }
 
-.ug-div.stone{
+.ug-div.stone {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -29,7 +29,7 @@
 
     border: 1px solid darkgray;
     border-radius: 5px;
-    box-shadow:  0 0 2px 1px white;
+    box-shadow: 0 0 2px 1px white;
 
     background-color: #dddddd;
 
@@ -40,7 +40,7 @@
 
 }
 
-.ug-ul{
+.ug-ul {
     margin-top: 5px;
     width: 100%;
 }
@@ -65,7 +65,7 @@
     font-size: 0.4rem;
 }
 
-.ug-li{
+.ug-li {
     font-size: 0.8rem;
     width: 98%;
     display: flex;
@@ -77,7 +77,7 @@
     padding: 2px;
 }
 
-.ug-li:last-child{
+.ug-li:last-child {
     border-bottom: 1px solid darkgray;
 }
 
@@ -98,7 +98,7 @@
     background-color: #bbbbbb;
 }
 
-.ug-li h6{
+.ug-li h6 {
     margin-left: 20px;
 }
 
@@ -121,11 +121,12 @@
 .ug-button.delgrave {
     margin-left: 30px;
 }
-.ug-button.down{
+
+.ug-button.down {
     margin-top: 75px;
 }
 
-.ug-button:hover{
+.ug-button:hover {
     padding: 0;
 }
 
@@ -134,24 +135,25 @@
     width: 16px;
     display: block;
 }
-.ug-button-img.center{
+
+.ug-button-img.center {
     margin: auto;
 }
 
 
-.ug-permission-buttons{
+.ug-permission-buttons {
     width: 48px;
 }
 
-.ug-label{
+.ug-label {
     margin: 4px 0;
     font-size: 0.8rem;
     font-weight: bold;
 }
 
-.ug-label-small{
-margin: 4px 0;
-font-size: 0.4rem;
+.ug-label-small {
+    margin: 4px 0;
+    font-size: 0.4rem;
 }
 
 .ug-above {

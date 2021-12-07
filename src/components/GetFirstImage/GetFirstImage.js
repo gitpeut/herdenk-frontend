@@ -6,11 +6,11 @@ import {useState, useEffect} from "react";
 import accessToTitle from "../../helpers/accessToTitle";
 import '../GraveStone/GraveStone.css';
 
-function GetFirstImage( {grave} ) {
-    const [ image, setImage] = useState( stone );
-    const [ pictureClass, setPictureClass] = useState( 'sg-stone' );
+function GetFirstImage({grave}) {
+    const [image, setImage] = useState(stone);
+    const [pictureClass, setPictureClass] = useState('sg-stone');
 
-    console.log( 'getfimage grave', grave);
+    console.log('getfimage grave', grave);
 
     useEffect(() => {
         async function waitForReactions() {
@@ -67,18 +67,18 @@ function GetFirstImage( {grave} ) {
         waitForReactions();
     }, [grave]);
 
-    const title = accessToTitle( grave.access );
+    const title = accessToTitle(grave.access);
 
-    return(
+    return (
         <>
-        { grave.access !== "NONE" &&
-                <Link to={`/grave/${grave.graveId}`}>
-                    <img src={image} alt={`Graf`} className={pictureClass} title={title}/>
-                </Link>
-        }
-        { grave.access === "NONE" &&
-        <img src={image} alt="Graf"  className={pictureClass} title={title}/>
-        }
+            {grave.access !== "NONE" &&
+            <Link to={`/grave/${grave.graveId}`}>
+                <img src={image} alt={`Graf`} className={pictureClass} title={title}/>
+            </Link>
+            }
+            {grave.access === "NONE" &&
+            <img src={image} alt="Graf" className={pictureClass} title={title}/>
+            }
         </>
     );
 }

@@ -7,13 +7,14 @@ import './Churchyard.css';
 
 function Churchyard() {
     const {loggedIn} = useContext(AuthContext);
-    const [graveSummary, setGraveSummary] = useState( null);
+    const [graveSummary, setGraveSummary] = useState(null);
 
     useEffect(
         () => {
-            async function waitForSummary(){
+            async function waitForSummary() {
                 await getGraveSummary();
             }
+
             waitForSummary();
         }, []
     );
@@ -33,24 +34,23 @@ function Churchyard() {
     }
 
 
-
-    return(
+    return (
         <div className="ch-main">
             {graveSummary && loggedIn &&
 
             graveSummary.map((grave) => {
                 return (
-                        <GraveStone grave={grave} key={`ch${grave.graveId}`}/>
+                    <GraveStone grave={grave} key={`ch${grave.graveId}`}/>
                 );
             })
             }
         </div>
 
-);
-
+    );
 
 
 }
+
 export default Churchyard;
 
 // <div className="ch-grave" key={`chdiv${grave.graveId}`}>

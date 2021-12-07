@@ -12,7 +12,7 @@ function GetBlob({url, classname, blobKey}) {
             try {
                 const JWT = localStorage.getItem('herdenkToken');
 
-                imageBlob = (await axios.get( url,
+                imageBlob = (await axios.get(url,
                     {
                         headers:
                             {
@@ -22,14 +22,14 @@ function GetBlob({url, classname, blobKey}) {
                         responseType: 'blob',
                     })).data;
 
-                 setImage(URL.createObjectURL(imageBlob));
+                setImage(URL.createObjectURL(imageBlob));
 
             } catch (err) {
                 return null;
             }
         }
 
-        async function waitForImage(){
+        async function waitForImage() {
             await getImage();
         }
 
@@ -39,9 +39,9 @@ function GetBlob({url, classname, blobKey}) {
 
     return (
         <>
-        {url &&
-        <img src={image} alt={`plaatje`} className={classname} key={blobKey}/>
-        }
+            {url &&
+            <img src={image} alt={`plaatje`} className={classname} key={blobKey}/>
+            }
         </>
     );
 }

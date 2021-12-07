@@ -24,37 +24,37 @@ import {AuthContext} from "../../context/AuthContext";
 // }
 
 
-function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
+function Reaction({reaction, isNew, graveCanChange, graveUpdater}) {
     const {user} = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState();
-    const [updateActive, setUpdateActive] = useState( isNew );
-    const [updateImage, setUpdateImage]   = useState(null);
-    const [fileName, setFileName]         = useState(null);
-    const [mediaPath, setMediaPath]       = useState( reaction.mediaPath );
+    const [updateActive, setUpdateActive] = useState(isNew);
+    const [updateImage, setUpdateImage] = useState(null);
+    const [fileName, setFileName] = useState(null);
+    const [mediaPath, setMediaPath] = useState(reaction.mediaPath);
 
     let newReaction = reaction;
 
-    let canChange = ( graveCanChange || isNew || user === reaction.userName );
+    let canChange = (graveCanChange || isNew || user === reaction.userName);
 
     if (reaction.type !== 'TEXT' && reaction.type !== 'MEDIA') return (<></>);
 
     const divClass = "r-div big";
     const imgClass = "r-img big";
 
-    const NLDate = formatDate(isNew ?'':reaction.creationDate);
+    const NLDate = formatDate(isNew ? '' : reaction.creationDate);
     const reactionKey = `${reaction.reactionId}`;
 
     let imgURL = null;
-    let mediaTitle  = null;
+    let mediaTitle = null;
 
-    if ( reaction.mediaPath ) {
+    if (reaction.mediaPath) {
         imgURL = `http://${backendHost()}${reaction.mediaPath}`;
         mediaTitle = reaction.mediaPath.split("/").pop();
     }
 
 
     function displayAWhile(message) {
-        setErrorMessage( message );
+        setErrorMessage(message);
         setTimeout(() => {
             setErrorMessage(null)
         }, 8000);
@@ -63,59 +63,59 @@ function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
     async function deleteReaction() {
         const reactionURL = `http://${backendHost()}/api/v1/reactions/${reaction.reactionId}`;
         const JWT = localStorage.getItem('herdenkToken');
-        const config = {headers:{ Authorization: 'Bearer ' + JWT }};
+        const config = {headers: {Authorization: 'Bearer ' + JWT}};
 
-        if ( !window.confirm(`Wilt u echt reactie ${reaction.reactionId} van  ${reaction.userName} verwijderen?`) ) return;
+        if (!window.confirm(`Wilt u echt reactie ${reaction.reactionId} van  ${reaction.userName} verwijderen?`)) return;
         try {
-                const result  = await axios.delete(reactionURL,config);
-                if ( result ) {
-                    graveUpdater(result.data)
-                    console.log("response from server: ", result);
-                }
-       } catch (e) {
-                displayAWhile("verwijderen mislukt");
+            const result = await axios.delete(reactionURL, config);
+            if (result) {
+                graveUpdater(result.data)
+                console.log("response from server: ", result);
+            }
+        } catch (e) {
+            displayAWhile("verwijderen mislukt");
         }
     }
 
     function auto_grow() {
-        const element = document.getElementById(`${reactionKey}textarea` );
+        const element = document.getElementById(`${reactionKey}textarea`);
         element.style.height = "6px";
-        element.style.height = ( element.scrollHeight ) + 'px';
+        element.style.height = (element.scrollHeight) + 'px';
     }
 
-    function addImage( e ){
-            setUpdateImage( e.target.files[0] );
-            setFileName(e.target.files[0].name);
-            setMediaPath(e.target.files[0].name);
+    function addImage(e) {
+        setUpdateImage(e.target.files[0]);
+        setFileName(e.target.files[0].name);
+        setMediaPath(e.target.files[0].name);
     }
 
-    function removeImage(){
-        setUpdateImage( null );
-        setFileName( null );
+    function removeImage() {
+        setUpdateImage(null);
+        setFileName(null);
         setMediaPath(null);
     }
 
 
-    function activateUpdate(){
-        const txtArea   = document.getElementById(`${reactionKey}textarea`);
-        const txtPlain  = document.getElementById(`${reactionKey}text`);
+    function activateUpdate() {
+        const txtArea = document.getElementById(`${reactionKey}textarea`);
+        const txtPlain = document.getElementById(`${reactionKey}text`);
 
-        if ( !updateActive){
+        if (!updateActive) {
             txtArea.value = newReaction.text;
             txtArea.style.height = txtPlain.scrollHeight + "px";
-        }else{ // cancel
+        } else { // cancel
             // reset values to original reaction
             txtArea.value = reaction.text;
-            setUpdateImage( null);
+            setUpdateImage(null);
             setFileName(null);
-            setMediaPath( reaction.mediaPath);
+            setMediaPath(reaction.mediaPath);
 
             newReaction = reaction; //remove  cancelled changes
         }
-        if( !isNew )setUpdateActive( !updateActive );
+        if (!isNew) setUpdateActive(!updateActive);
     }
 
-    async function submitUpdate( formData ) {
+    async function submitUpdate(formData) {
 
         const rc = {success: false, result: null};
 
@@ -123,18 +123,18 @@ function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
             const JWT = localStorage.getItem('herdenkToken');
             const config = {headers: {'Content-Type': 'multipart/form-data', 'Authorization': 'Bearer ' + JWT}};
 
-            if (isNew ) {
+            if (isNew) {
                 const URL = `http://${backendHost()}/api/v1/reactions/grave/${reaction.graveId}`;
                 rc.result = await axios.post(URL, formData, config);
-            }else{
+            } else {
                 const URL = `http://${backendHost()}/api/v1/reactions/${reaction.reactionId}`;
                 rc.result = await axios.put(URL, formData, config);
             }
 
             rc.success = true;
-            return( rc );
+            return (rc);
         } catch (e) {
-            if ( e.response) {
+            if (e.response) {
                 rc.success = false;
                 rc.result = e.response.data;
             }
@@ -143,22 +143,22 @@ function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
     }
 
 
-    async function prepareUpdate(){
+    async function prepareUpdate() {
 
         // before the textarea is made visible, the original text is copied in. So, no
         // extra checks necessary on validity.
         const textElement = document.getElementById(`${reactionKey}textarea`);
 
-        newReaction.text  = textElement.value;
-        newReaction.type  = 'TEXT';
+        newReaction.text = textElement.value;
+        newReaction.type = 'TEXT';
         newReaction.mediaPath = mediaPath;
 
-        if ( updateImage ) {
-            newReaction.type      = 'MEDIA';
+        if (updateImage) {
+            newReaction.type = 'MEDIA';
         }
 
         const formData = new FormData();
-        formData.append('reaction', new Blob([JSON.stringify( newReaction)], {
+        formData.append('reaction', new Blob([JSON.stringify(newReaction)], {
             type: "application/json"
         }));
         if (newReaction.type === 'MEDIA') {
@@ -169,27 +169,26 @@ function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
             );
         }
 
-        const rc = await submitUpdate( formData );
-        if ( !rc.success ){
-            displayAWhile( 'Update mislukt' );
-            console.error( rc.result);
+        const rc = await submitUpdate(formData);
+        if (!rc.success) {
+            displayAWhile('Update mislukt');
+            console.error(rc.result);
             activateUpdate()
-        }else{
+        } else {
 
-            const txtArea  = document.getElementById(`${reactionKey}textarea`);
+            const txtArea = document.getElementById(`${reactionKey}textarea`);
             txtArea.value = '';
 
-            setUpdateImage( null);
+            setUpdateImage(null);
             setFileName(null);
-            setMediaPath( isNew?null:reaction.mediaPath);
+            setMediaPath(isNew ? null : reaction.mediaPath);
 
             newReaction = reaction; //remove  cancelled changes
 
-            if( !isNew )setUpdateActive(false);
+            if (!isNew) setUpdateActive(false);
         }
         graveUpdater(rc.result);
     }
-
 
 
     return (
@@ -198,54 +197,55 @@ function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
                 <div className="little-letters" key={`${reactionKey}2`}>#{reaction.reactionId} {reaction.userName}</div>
                 <div className="little-letters" key={`${reactionKey}3`}>{NLDate}</div>
                 {errorMessage && <div className="r-above">{errorMessage}</div>}
-                { (canChange && !isNew) ?
+                {(canChange && !isNew) ?
                     <img src={trash} className="r-12x12" alt="delete reaction" title="verwijder deze reactie"
-                     onClick={deleteReaction}/>
-                     :
-                    <div className="r-12x12" />
+                         onClick={deleteReaction}/>
+                    :
+                    <div className="r-12x12"/>
                 }
             </div>
 
-            { updateActive && updateImage &&
-                <>
+            {updateActive && updateImage &&
+            <>
                 <div className="r-center" key={`${reactionKey}288`}>
-                   <img src={URL.createObjectURL(updateImage)}
-                     className={imgClass} alt="kan het plaatje niet laten zien.Kies een ander formaat" />
+                    <img src={URL.createObjectURL(updateImage)}
+                         className={imgClass} alt="kan het plaatje niet laten zien.Kies een ander formaat"/>
                 </div>
                 <div className="img-title" key={`${reactionKey}277`}>
                     {fileName}
                 </div>
-                </>
+            </>
             }
 
-            { !updateImage && mediaPath &&
-                <>
-                    <div className="r-center" key={`${reactionKey}28`}>
-                        <GetBlob url={imgURL} classname={imgClass} blobKey={`blob-${reactionKey}`}/>
-                    </div>
-                    <div className="img-title" key={`${reactionKey}27`}>
-                        {mediaTitle}
-                    </div>
-                </>
+            {!updateImage && mediaPath &&
+            <>
+                <div className="r-center" key={`${reactionKey}28`}>
+                    <GetBlob url={imgURL} classname={imgClass} blobKey={`blob-${reactionKey}`}/>
+                </div>
+                <div className="img-title" key={`${reactionKey}27`}>
+                    {mediaTitle}
+                </div>
+            </>
             }
 
-            <div key={`${reactionKey}4`} className={`r-div text ${updateActive?"r-noshow":""}`} id={`${reactionKey}text`}>
+            <div key={`${reactionKey}4`} className={`r-div text ${updateActive ? "r-noshow" : ""}`}
+                 id={`${reactionKey}text`}>
                 {reaction.text}
             </div>
 
-            <textarea className={`r-textarea r-div text ${updateActive?"":"r-noshow"}`}
+            <textarea className={`r-textarea r-div text ${updateActive ? "" : "r-noshow"}`}
                       id={`${reactionKey}textarea`}
                       onChange={() => auto_grow()}
             />
 
             <div className="r-name-date bottom" key={`${reactionKey}5`}>
-                { canChange && !updateActive &&
-                    <img src={pen} className="r-12x12" alt="verander reactie" title="verander deze reactie"
-                         onClick={activateUpdate}/>
-                    }
-                { canChange &&  updateActive &&
+                {canChange && !updateActive &&
+                <img src={pen} className="r-12x12" alt="verander reactie" title="verander deze reactie"
+                     onClick={activateUpdate}/>
+                }
+                {canChange && updateActive &&
                 <>
-                    { mediaPath &&
+                    {mediaPath &&
                     <button id="nofoto" className="r-submit">
                         <img src={nofoto} className="r-16x16" alt="cancel" title="Foto verwijderen"
                              onClick={removeImage}/>
@@ -253,31 +253,31 @@ function Reaction({reaction, isNew, graveCanChange, graveUpdater }) {
                     }
 
                     <label htmlFor={`${reactionKey}media`}
-                       title={ reaction.type === 'MEDIA'?'Foto vervangen':'Foto toevoegen'}
-                       className="r-submit">
+                           title={reaction.type === 'MEDIA' ? 'Foto vervangen' : 'Foto toevoegen'}
+                           className="r-submit">
 
-                    <input className="r-hidden" type="file"
-                           id={`${reactionKey}media`}
-                           onChange={addImage}
-                            />
-                    <img src={foto} className="r-16x16" alt="camera" />
-                </label>
+                        <input className="r-hidden" type="file"
+                               id={`${reactionKey}media`}
+                               onChange={addImage}
+                        />
+                        <img src={foto} className="r-16x16" alt="camera"/>
+                    </label>
 
-                <button id="cancel" className="r-submit">
-                <img src={none} className="r-12x12" alt="cancel" title="wijzigingen ongedaan maken"
-                         onClick={activateUpdate}/>
-                </button>
+                    <button id="cancel" className="r-submit">
+                        <img src={none} className="r-12x12" alt="cancel" title="wijzigingen ongedaan maken"
+                             onClick={activateUpdate}/>
+                    </button>
 
-                <button type="submit" id="submit" className="r-submit">
-                    <>
-                    <img src={good} className="r-12x12" alt="submit" title="reactie bijwerken"
-                        onClick={prepareUpdate}/>
-                    </>
-                </button>
+                    <button type="submit" id="submit" className="r-submit">
+                        <>
+                            <img src={good} className="r-12x12" alt="submit" title="reactie bijwerken"
+                                 onClick={prepareUpdate}/>
+                        </>
+                    </button>
                 </>
                 }
-                { !canChange &&
-                    <div className="r-12x12" />
+                {!canChange &&
+                <div className="r-12x12"/>
                 }
 
             </div>

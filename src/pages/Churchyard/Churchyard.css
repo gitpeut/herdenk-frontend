@@ -1,5 +1,5 @@
 
-.ch-main{
+.ch-main {
     display: flex;
     flex-direction: row;
     /*justify-content: center;*/
@@ -7,7 +7,7 @@
     flex-wrap: wrap;
 }
 
-.ch-grave{
+.ch-grave {
     min-width: 270px;
     max-width: 300px;
     max-height: 300px;
